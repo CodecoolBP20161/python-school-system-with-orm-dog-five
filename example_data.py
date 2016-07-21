@@ -94,16 +94,43 @@ def create_closest():
 
 def create_mentor():
     mentor_list = [
-        {'mid': 1, 'name': 'Miki', 'school_cid': 2}
-        {'mid': 2, 'name': 'Tomi', 'school_cid': 2}
-        {'mid': 3, 'name': 'Dani', 'school_cid': 2}
-        {'mid': 4, 'name': 'Attila', 'school_cid': 1}
-        {'mid': 5, 'name': 'Pali', 'school_cid': 1}
-        {'mid': 6, 'name': 'Sanyi', 'school_cid': 1}
-        {'mid': 7, 'name': 'Wladyslaw', 'school_cid': 3}
+                    {'name': 'Miki', 'school_cid': 2},
+                    {'name': 'Tomi', 'school_cid': 2},
+                    {'name': 'Dani', 'school_cid': 2},
+                    {'name': 'Attila', 'school_cid': 1},
+                    {'name': 'Pali', 'school_cid': 1},
+                    {'name': 'Sanyi', 'school_cid': 1},
+                    {'name': 'Wladyslaw', 'school_cid': 3}
     ]
     for m in mentor_list:
-        mentor = Mentor.create(mid=m['mid'], name=m['name'], school_cid=m['school_id'])
+        mentor = Mentor.create(name=m['name'], school_id=m['school_cid'])
+
+
+def create_interview():
+    interview_list = [
+                      {'day': date(2016, 7, 24),
+                       'start': time(14),
+                       'end': time(15),
+                       'mentor_id': 1},
+                      {'day': date(2016, 7, 24),
+                       'start': time(15),
+                       'end': time(16),
+                       'mentor_id': 2},
+                      {'day': date(2016, 7, 24),
+                       'start': time(16),
+                       'end': time(17),
+                       'mentor_id': 3},
+                      {'day': date(2016, 7, 25),
+                       'start': time(14),
+                       'end': time(15),
+                       'mentor_id': 1},
+                      {'day': date(2016, 7, 25),
+                       'start': time(15),
+                       'end': time(16),
+                       'mentor_id': 2}
+    ]
+    for i in interview_list:
+        interview_slot = Interview.create(day=i['day'], start=i['start'], end=i['end'], mentor_id=i['mentor_id'])
 
 
 create_cities()
@@ -111,3 +138,4 @@ create_applicants()
 create_school()
 create_closest()
 create_mentor()
+create_interview()
