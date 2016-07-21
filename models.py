@@ -27,8 +27,8 @@ class Applicant(BaseModel):
     aid = PrimaryKeyField()
     name = CharField()
     application_code = IntegerField(null=True)
-    home = ForeignKeyField(City, related_name="home_location")
-
+    home_cid = ForeignKeyField(City, related_name="home_location")
+    school_cid = ForeignKeyField(City, related_name="school_loc", null=True)
 
 class Closest(BaseModel):
     clid = PrimaryKeyField()
