@@ -41,7 +41,7 @@ class Interview(BaseModel):
 class Applicant(BaseModel):
     aid = PrimaryKeyField()
     name = CharField()
-    application_code = IntegerField(null=True, unique=True)
+    application_code = IntegerField(null=True)
     home_cid = ForeignKeyField(City, related_name="home_location")
     school_cid = ForeignKeyField(City, related_name="school_loc", null=True)
     interview = ForeignKeyField(Interview, related_name='applicant_interview', null=True, default=None)
