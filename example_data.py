@@ -91,7 +91,23 @@ def create_closest():
     for c in closest_list:
         closest = Closest.create(home_cid=c['home_cid'], school_cid=c['school_cid'])
 
+
+def create_mentor():
+    mentor_list = [
+        {'mid': 1, 'name': 'Miki', 'school_cid': 2}
+        {'mid': 2, 'name': 'Tomi', 'school_cid': 2}
+        {'mid': 3, 'name': 'Dani', 'school_cid': 2}
+        {'mid': 4, 'name': 'Attila', 'school_cid': 1}
+        {'mid': 5, 'name': 'Pali', 'school_cid': 1}
+        {'mid': 6, 'name': 'Sanyi', 'school_cid': 1}
+        {'mid': 7, 'name': 'Wladyslaw', 'school_cid': 3}
+    ]
+    for m in mentor_list:
+        mentor = Mentor.create(mid=m['mid'], name=m['name'], school_cid=m['school_id'])
+
+
 create_cities()
 create_applicants()
 create_school()
 create_closest()
+create_mentor()
