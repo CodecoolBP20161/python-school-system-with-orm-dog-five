@@ -13,24 +13,24 @@ class BaseModel(Model):
 
 
 class City(BaseModel):
-    CID = PrimaryKeyField()
+    cid = PrimaryKeyField()
     name = CharField()
 
 
 class School(BaseModel):
-    SID = PrimaryKeyField()
+    sid = PrimaryKeyField()
     name = CharField()
-    CID = ForeignKeyField(City, related_name="school_location")
+    cid = ForeignKeyField(City, related_name="school_location")
 
 
 class Applicant(BaseModel):
-    AID = PrimaryKeyField()
+    aid = PrimaryKeyField()
     name = CharField()
-    application_code = IntegerField()
+    application_code = IntegerField(null=True)
     home = ForeignKeyField(City, related_name="home_location")
 
 
 class Closest(BaseModel):
-    CLID = PrimaryKeyField()
-    Home_CID = ForeignKeyField(City, related_name="from_location")
-    School_CID = ForeignKeyField(City, related_name="to_location")
+    clid = PrimaryKeyField()
+    home_cid = ForeignKeyField(City, related_name="from_location")
+    school_cid = ForeignKeyField(City, related_name="to_location")
