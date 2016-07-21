@@ -26,7 +26,7 @@ class School(BaseModel):
 class Applicant(BaseModel):
     AID = PrimaryKeyField()
     name = CharField
-    application_code = IntegerField(unique=True)
+    application_code = IntegerField()
     home = ForeignKeyField(City, related_name="home_location")
 
 
