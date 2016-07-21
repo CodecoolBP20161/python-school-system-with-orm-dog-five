@@ -25,20 +25,6 @@ class School(BaseModel):
     cid = ForeignKeyField(City, related_name="school_location")
 
 
-class Applicant(BaseModel):
-    aid = PrimaryKeyField()
-    name = CharField()
-    application_code = IntegerField(null=True, unique=True)
-    home_cid = ForeignKeyField(City, related_name="home_location")
-    school_cid = ForeignKeyField(City, related_name="school_loc", null=True)
-    interview = ForeignKeyField(Interview, related_name='applicant_interview', default=None)
-
-
-class Closest(BaseModel):
-    clid = PrimaryKeyField()
-    home_cid = ForeignKeyField(City, related_name="from_location")
-    school_cid = ForeignKeyField(City, related_name="to_location")
-
 class Mentor(BaseModel):
     mid = PrimaryKeyField()
     name = CharField()
@@ -51,3 +37,17 @@ class Interview(BaseModel):
     end = DateField()
     mentor_id = ForeignKeyField(Mentor, related_name='mentor_interview')
     reserved = BooleanField(default=False)
+
+class Applicant(BaseModel):
+    aid = PrimaryKeyField()
+    name = CharField()
+    application_code = IntegerField(null=True, unique=True)
+    home_cid = ForeignKeyField(City, related_name="home_location")
+    school_cid = ForeignKeyField(City, related_name="school_loc", null=True)
+    interview = ForeignKeyField(Interview, related_name='applicant_interview', null=True, default=None)
+
+
+class Closest(BaseModel):
+    clid = PrimaryKeyField()
+    home_cid = ForeignKeyField(City, related_name="from_location")
+    school_cid = ForeignKeyField(City, related_name="to_location")
