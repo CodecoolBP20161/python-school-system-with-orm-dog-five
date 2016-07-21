@@ -24,7 +24,7 @@ def create_applicants():
                         'home_cid': 4,
                         'school_cid': None},
                        {'name': 'Emese',
-                        'application_code': 234,
+                        'application_code': 235,
                         'home_cid': 6,
                         'school_cid': None},
                        {'name': 'Gergő',
