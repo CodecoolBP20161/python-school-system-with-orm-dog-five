@@ -5,11 +5,17 @@ from connection import db
 
 def create(db):
     db.connect()
-    #db.drop_table([City, School, Applicant, Closest])
+
+    delete(db)
     try:
         db.create_tables([City, School, Applicant, Closest], safe=True)
         print('Tables were created')
     except OperationalError:
         print('Tables already exists')
+
+
+def delete(db):
+    db.drop_tables([City, School, Applicant, Closest], safe=True)
+    print("Deleted...")
 
 create(db)
