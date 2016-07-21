@@ -8,14 +8,14 @@ def create(db):
 
     delete(db)
     try:
-        db.create_tables([City, School, Applicant, Closest], safe=True)
+        db.create_tables([City, School, Applicant, Closest, Mentor, Interview], safe=True)
         print('Tables were created')
     except OperationalError:
         print('Tables already exists')
 
 
 def delete(db):
-    db.drop_tables([City, School, Applicant, Closest], safe=True)
+    db.drop_tables([City, School, Applicant, Closest, Mentor, Interview], safe=True)
     print("Deleted...")
 
 create(db)
