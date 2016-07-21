@@ -13,72 +13,83 @@ def create_applicants():
     applicants_list = [
                        {'name': 'János',
                         'application_code': 161,
-                        'home': 2},
+                        'home_cid': 2,
+                        'school_cid': None},
                        {'name': 'Réka',
-                        'application_code': 653,
-                        'home': 1},
+                        'application_code': None,
+                        'home_cid': 1,
+                        'school_cid': None},
                        {'name': 'John',
                         'application_code': 234,
-                        'home': 4},
+                        'home_cid': 4,
+                        'school_cid': None},
                        {'name': 'Emese',
                         'application_code': 234,
-                        'home': 6},
+                        'home_cid': 6,
+                        'school_cid': None},
                        {'name': 'Gergő',
-                        'application_code': 893,
-                        'home': 9},
+                        'application_code': None,
+                        'home_cid': 9,
+                        'school_cid': None},
                        {'name': 'Tamás',
                         'application_code': 432,
-                        'home': 10},
+                        'home_cid': 10,
+                        'school_cid': None},
                        {'name': 'Levente',
                         'application_code': 876,
-                        'home': 4},
+                        'home_cid': 4,
+                        'school_cid': None},
                        {'name': 'Anna',
                         'application_code': 712,
-                        'home': 3},
+                        'home_cid': 3,
+                        'school_cid': None},
                        {'name': 'Mónika',
                         'application_code': 342,
-                        'home': 2},
+                        'home_cid': 2,
+                        'school_cid': None},
                        {'name': 'Noémi',
                         'application_code': 189,
-                        'home': 2},
+                        'home_cid': 2,
+                        'school_cid': None},
                        {'name': 'Dániel',
                         'application_code': 195,
-                        'home': 8},
+                        'home_cid': 8,
+                        'school_cid': None},
     ]
 
     for a in applicants_list:
-        applicant = Applicant.create(name=a['name'], application_code=a['application_code'], home=a['home'])
+        applicant = Applicant.create(name=a['name'], application_code=a['application_code'], home_cid=a['home_cid'], school_cid=a['school_cid'])
 
 
 def create_school():
     school_list = [
                    {'name': 'Miskolc',
-                    'CID': 1},
+                    'cid': 1},
                    {'name': 'Budapest',
-                    'CID': 2},
+                    'cid': 2},
                    {'name': 'Kraków',
-                    'CID': 3}
+                    'cid': 3}
     ]
     for s in school_list:
-        school = School.create(name=s['name'], CID=s['CID'])
+        school = School.create(name=s['name'], cid=s['cid'])
 
 
 def create_closest():
     closest_list = [
-                    {'Home_CID': 1, 'School_CID': 1},
-                    {'Home_CID': 2, 'School_CID': 2},
-                    {'Home_CID': 3, 'School_CID': 3},
-                    {'Home_CID': 4, 'School_CID': 2},
-                    {'Home_CID': 5, 'School_CID': 2},
-                    {'Home_CID': 6, 'School_CID': 1},
-                    {'Home_CID': 7, 'School_CID': 2},
-                    {'Home_CID': 8, 'School_CID': 2},
-                    {'Home_CID': 9, 'School_CID': 2},
-                    {'Home_CID': 10, 'School_CID': 2},
-                    {'Home_CID': 11, 'School_CID': 2}
+                    {'home_cid': 1, 'school_cid': 1},
+                    {'home_cid': 2, 'school_cid': 2},
+                    {'home_cid': 3, 'school_cid': 3},
+                    {'home_cid': 4, 'school_cid': 2},
+                    {'home_cid': 5, 'school_cid': 2},
+                    {'home_cid': 6, 'school_cid': 1},
+                    {'home_cid': 7, 'school_cid': 2},
+                    {'home_cid': 8, 'school_cid': 2},
+                    {'home_cid': 9, 'school_cid': 2},
+                    {'home_cid': 10, 'school_cid': 2},
+                    {'home_cid': 11, 'school_cid': 2}
      ]
     for c in closest_list:
-        closest = Closest.create(Home_CID=c['Home_CID'], School_CID=c['School_CID'])
+        closest = Closest.create(home_cid=c['home_cid'], school_cid=c['school_cid'])
 
 create_cities()
 create_applicants()
