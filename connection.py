@@ -27,16 +27,21 @@ def db_data():
 
 def set_db():
     if check_dsn_txt():
-        answer = input("Login data already exists. Do you want to reenter login data? (Y/n) ")
-        if answer.lower() == "y":
-            dsn_input()
-            return db_data()
-        elif answer.lower() == 'n':
-            return db_data()
-        else:
-            print("Not a valid answer.")
+        return db_data()
     else:
         dsn_input()
         return db_data()
+
+
+# def error_db():
+#     answer = input("Error in login data. Do you want to reenter login data? (Y/n) ")
+#     if answer.lower() == "y":
+#         dsn_input()
+#         return db_data()
+#     elif answer.lower() == 'n':
+#         break
+#     else:
+#         print("Not a valid answer.")
+#         break
 
 db = set_db()
