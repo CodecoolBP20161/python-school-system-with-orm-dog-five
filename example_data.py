@@ -15,7 +15,7 @@ def create_applicants():
                         'application_code': 161,
                         'home_cid': 2,
                         'school_cid': None,
-                        'interview': 1},
+                        'interview': None},
                        {'name': 'Réka',
                         'application_code': None,
                         'home_cid': 1,
@@ -66,6 +66,11 @@ def create_applicants():
                         'home_cid': 8,
                         'school_cid': None,
                         'interview': None},
+                        {'name': 'Rotáb',
+                         'application_code': 196,
+                         'home_cid': 10,
+                         'school_cid': None,
+                         'interview': None}
     ]
 
     for a in applicants_list:
@@ -159,10 +164,22 @@ def create_interview():
                        'start': time(14),
                        'end': time(15),
                        'mentor_id': 1},
-                      {'day': date(2016, 7, 27),
-                       'start': time(15),
-                       'end': time(16),
-                       'mentor_id': 3}
+                      # {'day': date(2016, 7, 27),
+                      #  'start': time(15),
+                      #  'end': time(16),
+                      #  'mentor_id': 3},
+                      #   {'day': date(2016, 7, 28),
+                      #    'start': time(16),
+                      #    'end': time(17),
+                      #    'mentor_id': 2},
+                      #   {'day': date(2016, 7, 28),
+                      #    'start': time(16),
+                      #    'end': time(17),
+                      #    'mentor_id': 2},
+                      #   {'day': date(2016, 7, 28),
+                      #    'start': time(16),
+                      #    'end': time(17),
+                      #    'mentor_id': 2}
     ]
     for i in interview_list:
         interview_slot = Interview.create(day=i['day'], start=i['start'], end=i['end'], mentor_id=i['mentor_id'])
