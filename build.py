@@ -1,7 +1,9 @@
 # This script can create the database tables based on your models
 from peewee import *
 from models import *
+from applicant import Applicant
 from connection import db
+
 
 def create(db):
     db.connect()
@@ -17,5 +19,3 @@ def create(db):
 def delete(db):
     db.drop_tables([City, School, Applicant, Closest, Mentor, Interview], safe=True)
     print("Deleted...")
-
-create(db)

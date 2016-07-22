@@ -1,6 +1,7 @@
 # This script can generate example data for "City" and "InterviewSlot" models.
 
 from models import *
+from applicant import Applicant
 
 
 def create_cities():
@@ -183,12 +184,3 @@ def create_interview():
     ]
     for i in interview_list:
         interview_slot = Interview.create(day=i['day'], start=i['start'], end=i['end'], mentor_id=i['mentor_id'])
-
-
-create_cities()
-
-create_school()
-create_closest()
-create_mentor()
-create_interview()
-create_applicants()
