@@ -30,6 +30,7 @@ class Mentor(BaseModel):
     name = CharField()
     school_id = ForeignKeyField(School, related_name='mentor_school')
 
+
 class Interview(BaseModel):
     iid = PrimaryKeyField()
     day = DateField()
@@ -37,14 +38,6 @@ class Interview(BaseModel):
     end = TimeField()
     mentor_id = ForeignKeyField(Mentor, related_name='mentor_interview')
     reserved = BooleanField(default=False)
-
-class Applicant(BaseModel):
-    aid = PrimaryKeyField()
-    name = CharField()
-    application_code = IntegerField(null=True)
-    home_cid = ForeignKeyField(City, related_name="home_location")
-    school_cid = ForeignKeyField(City, related_name="school_loc", null=True)
-    interview = ForeignKeyField(Interview, related_name='applicant_interview', null=True, default=None)
 
 
 class Closest(BaseModel):
