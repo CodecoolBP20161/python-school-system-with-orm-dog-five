@@ -1,6 +1,7 @@
 from peewee import *
 import os
 
+
 class Connection:
     '''Handles everything related to database connection'''
 
@@ -46,5 +47,3 @@ class Connection:
         answer = print('Cannot connect to PostgreSQL. Check whether PostgrSQL is running and reenter login data!')
         cls.dsn_input()
         cls.set_db()
-
-db = Connection.set_db()
