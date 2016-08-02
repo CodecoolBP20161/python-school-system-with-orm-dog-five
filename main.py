@@ -22,6 +22,8 @@ if user_input == "1":
 elif user_input == "2":
     Applicant.get_closest_school()
     Applicant.update_appl_code()
+    Interview.set_reserved()
+    Interview.reserved_interview_to_applicant()
 
 else:
     print("Bye")

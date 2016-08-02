@@ -4,8 +4,9 @@
 from peewee import *
 from models import *
 from random import randint
-from city import *
-from interview import *
+from closest import Closest
+from city import City
+
 
 
 class Applicant(BaseModel):
@@ -14,7 +15,7 @@ class Applicant(BaseModel):
     application_code = IntegerField(null=True, unique=True)
     home_cid = ForeignKeyField(City, related_name="appl_home")
     school_cid = ForeignKeyField(City, related_name="appl_school", null=True)
-    interview = ForeignKeyField(Interview, related_name='appl_interview', null=True, default=None)
+    interview = IntegerField(null=True)
     code_set = set()
 
 
