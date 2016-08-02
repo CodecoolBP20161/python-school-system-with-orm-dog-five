@@ -25,21 +25,6 @@ class School(BaseModel):
     cid = ForeignKeyField(City, related_name="school_location")
 
 
-class Mentor(BaseModel):
-    mid = PrimaryKeyField()
-    name = CharField()
-    school_id = ForeignKeyField(School, related_name='mentor_school')
-
-
-class Interview(BaseModel):
-    iid = PrimaryKeyField()
-    day = DateField()
-    start = TimeField()
-    end = TimeField()
-    mentor_id = ForeignKeyField(Mentor, related_name='mentor_interview')
-    reserved = BooleanField(default=False)
-
-
 class Closest(BaseModel):
     clid = PrimaryKeyField()
     home_cid = ForeignKeyField(City, related_name="from_location")
