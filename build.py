@@ -3,6 +3,11 @@ from peewee import *
 from models import *
 from applicant import Applicant
 from connection import db
+from city import City
+from closest import Closest
+from interview import Interview
+from mentor import Mentor
+from school import School
 
 
 def create(db):

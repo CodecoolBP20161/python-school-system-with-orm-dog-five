@@ -12,20 +12,3 @@ class BaseModel(Model):
     """A base model that will use our Postgresql database"""
     class Meta:
         database = db
-
-
-class City(BaseModel):
-    cid = PrimaryKeyField()
-    name = CharField()
-
-
-class School(BaseModel):
-    sid = PrimaryKeyField()
-    name = CharField()
-    cid = ForeignKeyField(City, related_name="school_location")
-
-
-class Closest(BaseModel):
-    clid = PrimaryKeyField()
-    home_cid = ForeignKeyField(City, related_name="from_location")
-    school_cid = ForeignKeyField(City, related_name="to_location")

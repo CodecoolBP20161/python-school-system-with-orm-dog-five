@@ -4,6 +4,8 @@
 from peewee import *
 from models import *
 from random import randint
+from city import *
+from interview import *
 
 
 class Applicant(BaseModel):

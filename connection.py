@@ -46,3 +46,5 @@ class Connection:
         answer = print('Cannot connect to PostgreSQL. Check whether PostgrSQL is running and reenter login data!')
         cls.dsn_input()
         cls.set_db()
+
+db = Connection.set_db()

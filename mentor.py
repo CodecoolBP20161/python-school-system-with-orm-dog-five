@@ -1,5 +1,7 @@
 from peewee import *
 from models import *
+from school import School
+
 
 class Mentor(BaseModel):
     mid = PrimaryKeyField()
