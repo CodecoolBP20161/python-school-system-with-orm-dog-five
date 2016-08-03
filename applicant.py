@@ -1,16 +1,13 @@
-# New applicants arrive into your project database by this script.
-# You can run it anytime to generate new data!
-
 from peewee import *
-from models import *
+from models import BaseModel
 from random import randint
 from closest import Closest
 from city import City
 from interview import Interview
 
 
-
 class Applicant(BaseModel):
+    """Applicant model/table and data manipulation related to it"""
     aid = PrimaryKeyField()
     name = CharField()
     application_code = IntegerField(null=True, unique=True)
@@ -19,9 +16,11 @@ class Applicant(BaseModel):
     interview = ForeignKeyField(Interview, related_name="interview_id", null=True, unique=True)
     email = CharField(unique=True)
     sent_email = BooleanField(default=False)
+    # in real life this should be unique, but we send all e-mails to the same e-mail account in our test data
+    email = CharField()
     code_set = set()
 
-
+    # assigns closest school for applicant
     @classmethod
     def get_closest_school(cls):
         query = Closest.select(Closest.school_cid).where(cls.home_cid == Closest.home_cid)
@@ -32,7 +31,7 @@ class Applicant(BaseModel):
             else:
                 continue
 
-
+    # collects appl codes into a set
     @classmethod
     def read_codes(cls):
         code_set = set()
@@ -40,7 +39,7 @@ class Applicant(BaseModel):
             code_set.add(appl_record.application_code)
         return(code_set)
 
-
+    # assigns closest school for applicant
     @classmethod
     def update_appl_code(cls):
         cls.code_set = cls.read_codes()
@@ -48,7 +47,7 @@ class Applicant(BaseModel):
             appl.generate_code()
             appl.save()
 
-
+    # generates unique code for applicant record
     def generate_code(self):
         while True:
             if self.application_code not in self.code_set:
