@@ -6,6 +6,7 @@ from models import *
 from random import randint
 from closest import Closest
 from city import City
+from interview import Interview
 
 
 
@@ -15,7 +16,7 @@ class Applicant(BaseModel):
     application_code = IntegerField(null=True, unique=True)
     home_cid = ForeignKeyField(City, related_name="appl_home")
     school_cid = ForeignKeyField(City, related_name="appl_school", null=True)
-    interview = IntegerField(null=True)
+    interview = ForeignKeyField(Interview, related_name="interview_id", null=True, unique=True)
     code_set = set()
 
 
