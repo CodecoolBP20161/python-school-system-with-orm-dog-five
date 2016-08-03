@@ -54,12 +54,15 @@ class Applicant(BaseModel):
             self.application_code = randint(100, 999)
         self.code_set.add(self.application_code)
 
-
-    # gets the city, the name and the email address of those applicants, who got no e-mail yeat
+    # gets the city, the name and the email address of those applicants, who got no e-mail yet
     @classmethod
     def to_send_email(cls):
-        email_data = []
-        query = list(cls.select(cls.school_cid, cls.name, cls.email).where(cls.sent_email == False))
-        for applicant in query:
-            email_data.append(applicant)
-        return email_data
+        data_list = []
+        querry = cls.select().where(cls.sent_email == False)
+        for record in querry:
+            city_record = City.get(City.cid == record.school_cid)
+            data_list.append({'email': record.email,
+                              'name': record.name,
+                              'ap_code': record.application_code,
+                              'city': city_record.name})
+        return data_list
