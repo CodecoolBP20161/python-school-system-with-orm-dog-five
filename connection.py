@@ -34,6 +34,7 @@ class Connection:
             return cls.db
 
     # checks whether the login file already exists and creates connection with PostgreSQL
+    # this is what you need to call from main
     @classmethod
     def set_db(cls):
         if cls.check_dsn_txt():
@@ -104,6 +105,7 @@ class Connection:
             cls.server = smtplib.SMTP(server[0], server[1])
         return cls.server, cls.fromaddr, cls.password
 
+    # this is what you need to call from main
     @classmethod
     def set_smtp(cls):
         if cls.check_server_txt():
