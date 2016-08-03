@@ -18,6 +18,7 @@ class Applicant(BaseModel):
     school_cid = ForeignKeyField(City, related_name="appl_school", null=True)
     interview = ForeignKeyField(Interview, related_name="interview_id", null=True, unique=True)
     email = CharField(unique=True)
+    sent_email = BooleanField(default=False)
     code_set = set()
 
 
@@ -54,3 +55,13 @@ class Applicant(BaseModel):
                 break
             self.application_code = randint(100, 999)
         self.code_set.add(self.application_code)
+
+
+    # gets the city, the name and the email address of those applicants, who got no e-mail yeat
+    @classmethod
+    def to_send_email(cls):
+        email_data = []
+        query = list(cls.select(cls.school_cid, cls.name, cls.email).where(cls.sent_email == False))
+        for applicant in query:
+            email_data.append(applicant)
+        return email_data
