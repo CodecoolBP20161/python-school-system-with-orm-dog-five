@@ -17,6 +17,7 @@ class Applicant(BaseModel):
     home_cid = ForeignKeyField(City, related_name="appl_home")
     school_cid = ForeignKeyField(City, related_name="appl_school", null=True)
     interview = ForeignKeyField(Interview, related_name="interview_id", null=True, unique=True)
+    email = CharField(unique=True)
     code_set = set()
 
 
