@@ -60,6 +60,9 @@ class Applicant(BaseModel):
         data_list = []
         querry = cls.select().where(cls.sent_email == False)
         for record in querry:
-            city_record = City.get()
-            data_list.append([record.email, record.name, record.application_code, city_record.name])
+            city_record = City.get(City.cid == record.school_cid)
+            data_list.append({'email': record.email,
+                              'name': record.name,
+                              'ap_code': record.application_code,
+                              'city': city_record.name})
         return data_list

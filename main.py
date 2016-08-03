@@ -30,11 +30,7 @@ elif user_input == "3":
     Interview.reserved_interview_to_applicant()
 
 elif user_input == "4":
-    a = OrmEmail.create_newappl_msg()
-    for x in a:
-        print(x)
-
-#    OrmEmail.send()
+    OrmEmail.send()
 
 else:
     print("Bye")

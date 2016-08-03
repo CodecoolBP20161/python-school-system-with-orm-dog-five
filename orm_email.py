@@ -27,11 +27,15 @@ class OrmEmail(Connection):
     @classmethod
     def create_newappl_msg(cls):
         data_list = Applicant.to_send_email()
-        msg_list = data_list
+        msg_list = []
         for data in data_list:
-            msg = MIMEText('Hi ' + data[1] + "!")
+            msg = MIMEText('Hi ' + data['name'] + ","
+                           + "\n\nI am happy to inform you that you were accepted to Codecool in "\
+                           + data['city'] + "."\
+                           + "\nYour application code is " + str(data['ap_code']) + "."\
+                           + "\n\nRegards,\nCodecool Team")
             msg['Subject'] = 'Congratulation'
             msg['From'] = 'dog5.laboratories@gmail.com'
-            msg['To'] = record.email
+            msg['To'] = data['email']
             msg_list.append(msg)
         return msg_list
