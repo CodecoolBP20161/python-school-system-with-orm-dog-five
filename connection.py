@@ -54,7 +54,7 @@ class Connection:
     # check whether the file containing smtp data already exits
     @staticmethod
     def check_server_txt():
-        return os.path.isfile('smtp.server.txt')
+        return os.path.isfile('smtp_data.txt')
 
     # gets data for SMTP server
     @staticmethod
