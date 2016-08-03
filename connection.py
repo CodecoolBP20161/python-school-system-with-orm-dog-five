@@ -3,7 +3,7 @@ import os
 
 
 class Connection:
-    '''Handles everything related to database connection'''
+    '''Handles everything related to database connection and SMTP'''
 
     # check whether the login file already exits
     @staticmethod
@@ -21,8 +21,8 @@ class Connection:
                 myfile.write(word + '\n')
             print("Login file has been created.")
 
-    @classmethod
     # reads postgresql login data from txt file and defines db
+    @classmethod
     def db_data(cls):
         with open("login.txt", "r") as myfile:
             lines = myfile.readlines()

@@ -1,11 +1,5 @@
 from peewee import *
 from connection import Connection
-from datetime import date
-from datetime import time
-# from build import get_dsn, create, set_db
-# Configure your database connection here
-# database name = should be your username on your laptop
-# database user = should be your username on your laptop
 
 
 class BaseModel(Model):
