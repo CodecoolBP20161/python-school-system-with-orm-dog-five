@@ -23,12 +23,14 @@ class Interview(BaseModel):
     #             k.save()
     #         else:
     #             print("NO")
-
+    #
     # @classmethod
     # def set_reserved(cls):
-    #     reserved_list = list(Applicant.select().where(Applicant.interview is not None))
-    #     # for i in Applicant.select().where(Applicant.interview is not None):
-    #     #     reserved_list.append(i.interview)
+    #     from applicant import Applicant
+    #
+    #     reserved_list = list(Applicant.select().where(Applicant.interview != None))
+    #     for i in Applicant.select().where(Applicant.interview is not None):
+    #         reserved_list.append(i.interview)
     #     for k in cls.select():
     #         print(k.iid)
     #         if k.iid in reserved_list:
@@ -43,10 +45,11 @@ class Interview(BaseModel):
     def reserved_interview_to_applicant(cls):
         from applicant import Applicant
 
-        none_interview = list(cls.select().where(cls.reserved != True))
+        none_interview = list(cls.select().where(cls.reserved == False))
+        applicant_list = list(Applicant.select().where(Applicant.interview == None))
         i = len(none_interview) - 1
         try:
-            if len(none_interview) > 0:
+            if len(none_interview) < len(applicant_list):
                 for applicant in Applicant.select().where(Applicant.interview == None):
                     applicant.interview = none_interview[i]
                     none_interview.remove(none_interview[i])
@@ -56,7 +59,6 @@ class Interview(BaseModel):
                 Interview.interview_error()
         except IndexError:
             Interview.interview_error()
-
     # This method shows applicant without interview
     @staticmethod
     def interview_error():
@@ -65,3 +67,4 @@ class Interview(BaseModel):
         print("There are not enough interview-slot!")
         for applicant in Applicant.select().where(Applicant.interview == None):
             print("Applicant who does not have reserved interview: %s - ID: %d" % (applicant.name, applicant.aid))
+
