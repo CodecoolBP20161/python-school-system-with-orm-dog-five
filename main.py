@@ -12,14 +12,15 @@ from interview import Interview
 user_input = input("Hello! Would you like to:\
                    \n1. Set up your database (WARNING: this will delete all your data!)\
                    \n2. Set up e-mail stuff\
-                   \n3. Update new applicants with code, reserve interview and send e-mail\
+                   \n3. Update new applicants with code, school city and reserve interview\
+                   \n4. Send e-mails to new applicants\
                    \n")
 
 if user_input == "1":
     Build.create_tables()
     Build.upload_data()
 
-if user_input == "2":
+elif user_input == "2":
     Connection.set_smtp()
 
 elif user_input == "3":
@@ -28,6 +29,7 @@ elif user_input == "3":
 
     Interview.reserved_interview_to_applicant()
 
+elif user_input == "4":
     a = OrmEmail.create_newappl_msg()
     for x in a:
         print(x)
