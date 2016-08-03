@@ -137,3 +137,6 @@ fabric.properties
 
 # DSN info
 login.txt
+
+# SMTP info
+smtp_data.txt
