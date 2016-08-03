@@ -16,6 +16,7 @@ class Applicant(BaseModel):
     interview = ForeignKeyField(Interview, related_name="interview_id", null=True, unique=True)
     # in real life this should be unique, but we send all e-mails to the same e-mail account in our test data
     email = CharField()
+    sent_email = BooleanField(default=False)
     code_set = set()
 
     # assigns closest school for applicant
@@ -52,3 +53,13 @@ class Applicant(BaseModel):
                 break
             self.application_code = randint(100, 999)
         self.code_set.add(self.application_code)
+
+
+    # gets the city, the name and the email address of those applicants, who got no e-mail yeat
+    @classmethod
+    def to_send_email(cls):
+        email_data = []
+        query = list(cls.select(cls.school_cid, cls.name, cls.email).where(cls.sent_email == False))
+        for applicant in query:
+            email_data.append(applicant)
+        return email_data
