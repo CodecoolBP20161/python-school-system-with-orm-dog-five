@@ -30,9 +30,9 @@ class OrmEmail(Connection):
         msg_list = []
         for data in data_list:
             msg = MIMEText('Hi ' + data['name'] + ","
-                           + "\n\nI am happy to inform you that you were accepted to Codecool in "\
-                           + data['city'] + "."\
-                           + "\nYour application code is " + str(data['ap_code']) + "."\
+                           + "\n\nI am happy to inform you that we received your application to Codecool."
+                           + "\nThe closest Codecool School to you is in " + data['city'] + "."
+                           + "\nYour application code is " + str(data['ap_code']) + "."
                            + "\n\nRegards,\nCodecool Team")
             msg['Subject'] = 'Congratulation'
             msg['From'] = 'dog5.laboratories@gmail.com'
