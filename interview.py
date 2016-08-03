@@ -8,7 +8,6 @@ class Interview(BaseModel):
     day = DateField()
     start_time = TimeField()
     end_time = TimeField()
-    mentor_id = ForeignKeyField(Mentor, related_name='mentor_interview')
     reserved = BooleanField(default=False)
 
     # THIS CODE IS FOR FUTURE WORK
