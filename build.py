@@ -8,6 +8,7 @@ from interview import Interview
 from mentor import Mentor
 from school import School
 from example_data import ExampleData
+from interview_slot import InterviewSlot
 
 
 class Build(Connection):
@@ -20,15 +21,15 @@ class Build(Connection):
 
         cls.delete()
         try:
-            cls.db.create_tables([City, School, Applicant, Closest, Mentor, Interview], safe=True)
-            print('Tables were created.')
+            cls.db.create_tables([City, School, Applicant, Closest, Mentor, Interview, InterviewSlot], safe=True)
+            print('Tables were created')
         except OperationalError:
             print('Tables already exists.')
 
     # deletes tables
     @classmethod
     def delete(cls):
-        cls.db.drop_tables([City, School, Applicant, Closest, Mentor, Interview], safe=True)
+        cls.db.drop_tables([City, School, Applicant, Closest, Mentor, Interview, InterviewSlot], safe=True)
         print("Tables deleted.")
 
     # fill it up with data
