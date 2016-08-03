@@ -14,7 +14,8 @@ class Applicant(BaseModel):
     home_cid = ForeignKeyField(City, related_name="appl_home")
     school_cid = ForeignKeyField(City, related_name="appl_school", null=True)
     interview = ForeignKeyField(Interview, related_name="interview_id", null=True, unique=True)
-    email = CharField(unique=True)
+    # in real life this should be unique, but we send all e-mails to the same e-mail account in our test data
+    email = CharField()
     code_set = set()
 
     # assigns closest school for applicant

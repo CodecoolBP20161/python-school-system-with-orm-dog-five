@@ -16,9 +16,7 @@ class Build(Connection):
     # create tables then fills them up with data
     @classmethod
     def create_tables(cls):
-
         cls.db.connect()
-
         cls.delete()
         try:
             cls.db.create_tables([City, School, Applicant, Closest, Mentor, Interview, InterviewSlot], safe=True)
@@ -29,7 +27,7 @@ class Build(Connection):
     # deletes tables
     @classmethod
     def delete(cls):
-        cls.db.drop_tables([City, School, Applicant, Closest, Mentor, Interview, InterviewSlot], safe=True)
+        cls.db.drop_tables([City, School, Applicant, Closest, Mentor, Interview, InterviewSlot], safe=True, cascade = True)
         print("Tables deleted.")
 
     # fill it up with data

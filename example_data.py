@@ -189,7 +189,8 @@ class ExampleData():
                                          application_code=a['application_code'],
                                          home_cid=a['home_cid'],
                                          school_cid=a['school_cid'],
-                                         interview=a['interview'])
+                                         interview=a['interview'],
+                                         email=a['email'])
 
     # school table
     @classmethod
