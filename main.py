@@ -1,8 +1,8 @@
 from models import *
-from build import *
-from connection import db
+from build import Build
+from connection import Connection
 from example_data import *
-from applicant import *
+from applicant import Applicant
 # Write here your console application
 
 user_input = input("Hello! Would you like to:\
@@ -11,7 +11,7 @@ user_input = input("Hello! Would you like to:\
                    \n")
 
 if user_input == "1":
-    create(db)
+    Build.create()
     create_cities()
     create_school()
     create_closest()
@@ -22,6 +22,8 @@ if user_input == "1":
 elif user_input == "2":
     Applicant.get_closest_school()
     Applicant.update_appl_code()
+
+    Interview.reserved_interview_to_applicant()
 
 else:
     print("Bye")

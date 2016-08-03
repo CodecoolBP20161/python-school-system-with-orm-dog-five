@@ -1,6 +1,7 @@
 from peewee import *
 import os
 
+
 class Connection:
     '''Handles everything related to database connection'''
 
