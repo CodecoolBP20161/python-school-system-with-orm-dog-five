@@ -13,7 +13,6 @@ class Applicant(BaseModel):
     application_code = IntegerField(null=True, unique=True)
     home_cid = ForeignKeyField(City, related_name="appl_home")
     school_cid = ForeignKeyField(City, related_name="appl_school", null=True)
-    interview = ForeignKeyField(Interview, related_name="interview_id", null=True, unique=True)
     # in real life this should be unique, but we send all e-mails to the same e-mail account in our test data
     email = CharField()
     sent_email = BooleanField(default=False)
@@ -55,14 +54,25 @@ class Applicant(BaseModel):
         self.code_set.add(self.application_code)
 
     # gets the city, the name and the email address of those applicants, who got no e-mail yet
+    # and modify sent_email column to True
     @classmethod
     def to_send_email(cls):
         data_list = []
-        querry = cls.select().where(cls.sent_email == False)
-        for record in querry:
-            city_record = City.get(City.cid == record.school_cid)
-            data_list.append({'email': record.email,
-                              'name': record.name,
-                              'ap_code': record.application_code,
-                              'city': city_record.name})
+        querry = list(cls.select())
+        count = len(cls.select().where(cls.sent_email == False))
+        if count != 0:
+            while count >= 1:
+                for record in querry:
+                    if record.sent_email is False:
+                        city_record = City.get(City.cid == record.school_cid)
+                        data_list.append({'email': record.email,
+                                          'name': record.name,
+                                          'ap_code': record.application_code,
+                                          'city': city_record.name,
+                                          'aid': record.aid})
+                        record.sent_email = True
+                        record.save()
+                        count -= 1
+        else:
+            print("All email have been sent.")
         return data_list
