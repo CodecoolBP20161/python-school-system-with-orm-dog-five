@@ -39,4 +39,5 @@ class Build(Connection):
         ExampleData.create_mentor()
         ExampleData.create_interview()
         ExampleData.create_applicants()
+        ExampleData.create_scheduled_interviews()
         print('Tables updated with example data.')

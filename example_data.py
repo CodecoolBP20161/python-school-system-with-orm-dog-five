@@ -137,7 +137,37 @@ class ExampleData():
                       {'day': date(2016, 7, 24),
                        'start_time': time(14),
                        'end_time': time(15),
-                       'location': 1
+                       'location': 3
+                       },
+                      {'day': date(2016, 7, 24),
+                       'start_time': time(14),
+                       'end_time': time(15),
+                       'location': 2
+                       },
+                      {'day': date(2016, 7, 24),
+                       'start_time': time(14),
+                       'end_time': time(15),
+                       'location': 2
+                       },
+                      {'day': date(2016, 7, 24),
+                       'start_time': time(14),
+                       'end_time': time(15),
+                       'location': 2
+                       },
+                      {'day': date(2016, 7, 24),
+                       'start_time': time(14),
+                       'end_time': time(15),
+                       'location': 2
+                       },
+                      {'day': date(2016, 7, 24),
+                       'start_time': time(14),
+                       'end_time': time(15),
+                       'location': 2
+                       },
+                      {'day': date(2016, 7, 24),
+                       'start_time': time(14),
+                       'end_time': time(15),
+                       'location': 2
                        },
                       {'day': date(2016, 7, 24),
                        'start_time': time(15),
@@ -147,7 +177,8 @@ class ExampleData():
                       {'day': date(2016, 7, 24),
                        'start_time': time(16),
                        'end_time': time(17),
-                       'location': 2
+                       'location': 2,
+                       'reserved': True
                        },
                       {'day': date(2016, 7, 25),
                        'start_time': time(14),
@@ -241,4 +272,4 @@ class ExampleData():
         for i in cls.scheduled_interviews:
             scheduled_interview = InterviewSlot.create(applicant_id=i['applicant_id'],
                                                        mentor_id=i['mentor_id'],
-                                                       interview_id=i['end_time'])
+                                                       interview_id=i['interview_id'])
