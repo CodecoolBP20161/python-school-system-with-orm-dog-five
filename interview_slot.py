@@ -14,7 +14,9 @@ class InterviewSlot(BaseModel):
     @classmethod
     def schedule(cls):
         """finds free interviews and assigns applicant and mentor with matching city"""
-        q = Applicant.select() #.join(InterviewSlot, JOIN.LEFT_OUTER).where(cls.applicant_id == None)
+        q = Applicant.select().join(cls, JOIN.LEFT_OUTER)
+        c = q.count()
+        print(c)
         for x in q:
             print(x)
 
