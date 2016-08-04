@@ -54,15 +54,51 @@ class Applicant(BaseModel):
             self.application_code = randint(100, 999)
         self.code_set.add(self.application_code)
 
+    @classmethod
+    def is_application_code(cls):
+        app_has_appcode = cls.select().where(cls.application_code != None)
+        if len(app_has_appcode) >= 1:
+            return True
+        else:
+            return False
+
+    @classmethod
+    def is_school_cid(cls):
+        app_has_school_cid = cls.select().where(cls.school_cid != None)
+        if len(app_has_school_cid) >= 1:
+            return True
+        else:
+            return False
+
+
+    @classmethod
+    def applicants_without_app_code(cls):
+        applicants = cls.select().where(cls.application_code == None)
+        if len(applicants) != 0:
+            return applicants
+
+    @classmethod
+    def applicants_without_school(cls):
+        applicants = cls.select().where(cls.school_cid == None)
+        if len(applicants) != 0:
+            return applicants
+
     # gets the city, the name and the email address of those applicants, who got no e-mail yet
     @classmethod
     def to_send_email(cls):
         data_list = []
-        querry = cls.select().where(cls.sent_email == False)
-        for record in querry:
-            city_record = City.get(City.cid == record.school_cid)
-            data_list.append({'email': record.email,
-                              'name': record.name,
-                              'ap_code': record.application_code,
-                              'city': city_record.name})
-        return data_list
+        querry = cls.select().where(cls.sent_email == False and cls.application_code != None and cls.school_cid != None)
+        if querry.count() != 0:
+            for record in querry:
+                city_record = City.get(City.cid == record.school_cid)
+                data_list.append({'email': record.email,
+                                  'name': record.name,
+                                  'ap_code': record.application_code,
+                                  'city': city_record.name,
+                                  'aid': record.aid})
+                record.sent_email = True
+                record.save()
+                return data_list
+        else:
+            print("Can't send email to everyone.")
+            return []
