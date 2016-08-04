@@ -135,44 +135,44 @@ class ExampleData():
     interview_list = [
                       {'day': date(2016, 7, 24),
                        'start_time': time(14),
-                       'end_time': time(15),
-                       'mentor_id': 1},
+                       'end_time': time(15)
+                       },
                       {'day': date(2016, 7, 24),
                        'start_time': time(15),
-                       'end_time': time(16),
-                       'mentor_id': 2},
+                       'end_time': time(16)
+                       },
                       {'day': date(2016, 7, 24),
                        'start_time': time(16),
-                       'end_time': time(17),
-                       'mentor_id': 3},
+                       'end_time': time(17)
+                       },
                       {'day': date(2016, 7, 25),
                        'start_time': time(14),
-                       'end_time': time(15),
-                       'mentor_id': 1},
+                       'end_time': time(15)
+                       },
                       {'day': date(2016, 7, 25),
                        'start_time': time(15),
-                       'end_time': time(16),
-                       'mentor_id': 2},
+                       'end_time': time(16)
+                       },
                       {'day': date(2016, 7, 25),
                        'start_time': time(16),
-                       'end_time': time(17),
-                       'mentor_id': 1},
+                       'end_time': time(17)
+                       },
                       {'day': date(2016, 7, 26),
                        'start_time': time(14),
-                       'end_time': time(15),
-                       'mentor_id': 2},
+                       'end_time': time(15)
+                       },
                       {'day': date(2016, 7, 26),
                        'start_time': time(15),
-                       'end_time': time(16),
-                       'mentor_id': 1},
+                       'end_time': time(16)
+                       },
                       {'day': date(2016, 7, 26),
                        'start_time': time(16),
-                       'end_time': time(17),
-                       'mentor_id': 2},
+                       'end_time': time(17)
+                       },
                       {'day': date(2016, 7, 27),
                        'start_time': time(14),
-                       'end_time': time(15),
-                       'mentor_id': 1},
+                       'end_time': time(15)
+                       }
                        ]
 
     # cities table
