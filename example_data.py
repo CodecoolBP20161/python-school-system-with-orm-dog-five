@@ -142,7 +142,7 @@ class ExampleData():
                       {'day': date(2016, 7, 24),
                        'start_time': time(14),
                        'end_time': time(15),
-                       'location': 2
+                       'location': 3
                        },
                       {'day': date(2016, 7, 24),
                        'start_time': time(14),
