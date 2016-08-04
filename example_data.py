@@ -3,6 +3,7 @@ from applicant import Applicant
 from city import City
 from closest import Closest
 from interview import Interview
+from interview_slot import InterviewSlot
 from mentor import Mentor
 from school import School
 from datetime import time
@@ -135,45 +136,59 @@ class ExampleData():
     interview_list = [
                       {'day': date(2016, 7, 24),
                        'start_time': time(14),
-                       'end_time': time(15)
+                       'end_time': time(15),
+                       'location': 1
                        },
                       {'day': date(2016, 7, 24),
                        'start_time': time(15),
-                       'end_time': time(16)
+                       'end_time': time(16),
+                       'location': 1
                        },
                       {'day': date(2016, 7, 24),
                        'start_time': time(16),
-                       'end_time': time(17)
+                       'end_time': time(17),
+                       'location': 2
                        },
                       {'day': date(2016, 7, 25),
                        'start_time': time(14),
-                       'end_time': time(15)
+                       'end_time': time(15),
+                       'location': 1
                        },
                       {'day': date(2016, 7, 25),
                        'start_time': time(15),
-                       'end_time': time(16)
+                       'end_time': time(16),
+                       'location': 1
                        },
                       {'day': date(2016, 7, 25),
                        'start_time': time(16),
-                       'end_time': time(17)
+                       'end_time': time(17),
+                       'location': 1
                        },
                       {'day': date(2016, 7, 26),
                        'start_time': time(14),
-                       'end_time': time(15)
+                       'end_time': time(15),
+                       'location': 1
                        },
                       {'day': date(2016, 7, 26),
                        'start_time': time(15),
-                       'end_time': time(16)
+                       'end_time': time(16),
+                       'location': 1
                        },
                       {'day': date(2016, 7, 26),
                        'start_time': time(16),
-                       'end_time': time(17)
+                       'end_time': time(17),
+                       'location': 1
                        },
                       {'day': date(2016, 7, 27),
                        'start_time': time(14),
-                       'end_time': time(15)
+                       'end_time': time(15),
+                       'location': 1
                        }
                        ]
+
+    scheduled_interviews = [{'applicant_id': 1,
+                             'mentor_id': 2,
+                             'interview_id': 3}]
 
     # cities table
     @classmethod
@@ -211,11 +226,19 @@ class ExampleData():
         for m in cls.mentor_list:
             mentor = Mentor.create(name=m['name'], school_id=m['school_cid'])
 
-    # interview slots
+    # interview time slots
     @classmethod
     def create_interview(cls):
         for i in cls.interview_list:
             interview_slot = Interview.create(day=i['day'],
                                               start_time=i['start_time'],
                                               end_time=i['end_time'],
-                                              mentor_id=i['mentor_id'])
+                                              location=i['location'])
+
+    # scheduled interviews
+    @classmethod
+    def create_scheduled_interviews(cls):
+        for i in cls.scheduled_interviews:
+            scheduled_interview = InterviewSlot.create(applicant_id=i['applicant_id'],
+                                                       mentor_id=i['mentor_id'],
+                                                       interview_id=i['end_time'])
