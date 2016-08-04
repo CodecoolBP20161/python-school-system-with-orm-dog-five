@@ -13,7 +13,6 @@ class Applicant(BaseModel):
     application_code = IntegerField(null=True, unique=True)
     home_cid = ForeignKeyField(City, related_name="appl_home")
     school_cid = ForeignKeyField(City, related_name="appl_school", null=True)
-    interview = ForeignKeyField(Interview, related_name="interview_id", null=True, unique=True)
     # in real life this should be unique, but we send all e-mails to the same e-mail account in our test data
     email = CharField()
     sent_email = BooleanField(default=False)
