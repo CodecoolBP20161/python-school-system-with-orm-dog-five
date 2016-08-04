@@ -34,6 +34,3 @@ class InterviewSlot(BaseModel):
             else:
                 print('Assign closest school to applicants first.')
                 break
-
-        c = Applicant.select().join(cls, JOIN.LEFT_OUTER).where(cls.applicant_id==None).count()
-        print(c)
