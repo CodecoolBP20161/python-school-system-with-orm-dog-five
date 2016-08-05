@@ -16,7 +16,8 @@ class Applicant(BaseModel):
     school_cid = ForeignKeyField(School, related_name="appl_school", null=True)
     # in real life this should be unique, but we send all e-mails to the same e-mail account in our test data
     email = CharField()
-    sent_email = BooleanField(default=False)
+    sent_newapp_email = BooleanField(default=False)
+    sent_interview_email = BooleanField(default=False)
     code_set = set()
 
     # assigns closest school for applicant
@@ -59,7 +60,7 @@ class Applicant(BaseModel):
     @classmethod
     def to_newappl_msg(cls):
         data_list = []
-        querry = cls.select().where(cls.sent_email == False and cls.application_code != None and cls.school_cid != None)
+        querry = cls.select().where(cls.sent_newapp_email == False and cls.application_code != None and cls.school_cid != None)
         if querry.count() == 0:
             raise StopIteration
         for record in querry:
@@ -69,7 +70,7 @@ class Applicant(BaseModel):
                               'ap_code': record.application_code,
                               'city': city_record.name,
                               'aid': record.aid})
-            record.sent_email = True
+            record.sent_newapp_email = True
             record.save()
         return data_list
         # else:

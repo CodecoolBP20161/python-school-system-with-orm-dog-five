@@ -89,13 +89,13 @@ class ExampleData():
                        ]
 
     mentor_list = [
-                    {'name': 'Miki', 'school_cid': 2},
-                    {'name': 'Tomi', 'school_cid': 2},
-                    {'name': 'Dani', 'school_cid': 2},
-                    {'name': 'Attila', 'school_cid': 1},
-                    {'name': 'Pali', 'school_cid': 1},
-                    {'name': 'Sanyi', 'school_cid': 1},
-                    {'name': 'Wladyslaw', 'school_cid': 3}
+                    {'name': 'Miki', 'school_cid': 2, 'email': "codecool.dog5@gmail.com"},
+                    {'name': 'Tomi', 'school_cid': 2, 'email': "codecool.dog5@gmail.com"},
+                    {'name': 'Dani', 'school_cid': 2, 'email': "codecool.dog5@gmail.com"},
+                    {'name': 'Attila', 'school_cid': 1, 'email': "codecool.dog5@gmail.com"},
+                    {'name': 'Pali', 'school_cid': 1, 'email': "codecool.dog5@gmail.com"},
+                    {'name': 'Sanyi', 'school_cid': 1, 'email': "codecool.dog5@gmail.com"},
+                    {'name': 'Wladyslaw', 'school_cid': 3, 'email': "codecool.dog5@gmail.com"}
                     ]
 
     school_list = [
@@ -242,7 +242,7 @@ class ExampleData():
     @classmethod
     def create_mentor(cls):
         for m in cls.mentor_list:
-            mentor = Mentor.create(name=m['name'], school_id=m['school_cid'])
+            mentor = Mentor.create(name=m['name'], school_id=m['school_cid'], email=m['email'])
 
     # interview time slots
     @classmethod

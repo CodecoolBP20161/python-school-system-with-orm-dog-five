@@ -15,7 +15,8 @@ user_input = input("Hello! Would you like to:\
                    \n2. Set up e-mail stuff\
                    \n3. Update new applicants with code and closest school\
                    \n4. Schedule interviews\
-                   \n5. Send e-mails to new applicants\
+                   \n5. Acceptance e-mails to new applicants\
+                   \n6. Interview e-mails to mentors\
                    \n")
 
 if user_input == "1":
@@ -34,6 +35,10 @@ elif user_input == "4":
 
 elif user_input == "5":
     msg_list = OrmEmail.create_newappl_msg()
+    OrmEmail.send(msg_list)
+
+elif user_input == "6":
+    msg_list = OrmEmail.create_mentor_interview_msg()
     OrmEmail.send(msg_list)
 
 else:
