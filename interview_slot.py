@@ -11,6 +11,7 @@ class InterviewSlot(BaseModel):
     applicant_id = ForeignKeyField(Applicant, related_name="applicants_id", default=None, null=True)
     mentor_id = ForeignKeyField(Mentor, related_name="mentors_id", default=None, null=True)
     interview_id = ForeignKeyField(Interview, related_name="interviews_id", default=None, null=True)
+    sent_interview = BooleanField(default=False)
 
     # schedules an interview with error handling
     @classmethod
@@ -34,3 +35,26 @@ class InterviewSlot(BaseModel):
             else:
                 print('Assign closest school to applicants first.')
                 break
+
+
+    @classmethod
+    def set_email_to_sent(cls):
+        cls.sent_interview = True
+
+
+    @classmethod
+    def get_everything(cls):
+        '''finds applicants name, e-mail, mentors name and a free interview slot which is not reserved
+            sends email to applicants to didn't get one earlier'''
+        data_list = []
+        for applicant in cls.select(Applicant,Mentor,Interview,InterviewSlot).join(Applicant, on=(cls.applicant_id == Applicant.aid)).join(Mentor, on=(cls.mentor_id == Mentor.mid)).join(Interview, on=(cls.interview_id == Interview.iid)).where(cls.sent_interview == False):
+            data_list.append({'applicant_name': Applicant.name,
+                              'applicant_email': Applicant.email,
+                              'mentor_name': Mentor.name,
+                              'interview_start': Interview.start_time
+                              })
+            applicant.sent_interview = True
+            applicant.save()
+        return data_list
+
+InterviewSlot.get_everything()
