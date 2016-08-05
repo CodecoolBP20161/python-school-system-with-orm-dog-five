@@ -57,12 +57,13 @@ class Applicant(BaseModel):
     # gets the city, the name and the email address of those applicants, who got no e-mail yet
     # and modify sent_email column to True
     @classmethod
-    def to_send_email(cls):
+    def to_newappl_msg(cls):
         data_list = []
         querry = cls.select().where(cls.sent_email == False and cls.application_code != None and cls.school_cid != None)
-        print(querry.count())
+        if querry.count() == 0:
+            raise StopIteration
         for record in querry:
-            city_record = City.get(City.cid == record.school_cid)
+            city_record = City.select().join(School).join(Applicant).where(Applicant.aid==record.aid).get()
             data_list.append({'email': record.email,
                               'name': record.name,
                               'ap_code': record.application_code,
@@ -70,7 +71,7 @@ class Applicant(BaseModel):
                               'aid': record.aid})
             record.sent_email = True
             record.save()
-            return data_list
+        return data_list
         # else:
         #     print("Can't send email to everyone.")
         #     return []
@@ -105,5 +106,3 @@ class Applicant(BaseModel):
         applicants = cls.select().where(cls.school_cid == None)
         if len(applicants) != 0:
             return applicants
-
-Applicant.to_send_email()

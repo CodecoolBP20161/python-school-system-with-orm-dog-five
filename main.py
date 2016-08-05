@@ -33,7 +33,8 @@ elif user_input == "4":
     InterviewSlot.schedule()
 
 elif user_input == "5":
-    OrmEmail.send()
+    msg_list = OrmEmail.create_newappl_msg()
+    OrmEmail.send(msg_list)
 
 else:
     print("Bye")
