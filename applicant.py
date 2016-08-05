@@ -14,7 +14,6 @@ class Applicant(BaseModel):
     application_code = IntegerField(null=True, unique=True)
     home_cid = ForeignKeyField(City, related_name="appl_home")
     school_cid = ForeignKeyField(School, related_name="appl_school", null=True)
-    interview = ForeignKeyField(Interview, related_name="interview_id", null=True, unique=True)
     # in real life this should be unique, but we send all e-mails to the same e-mail account in our test data
     email = CharField()
     sent_email = BooleanField(default=False)
@@ -56,14 +55,55 @@ class Applicant(BaseModel):
         self.code_set.add(self.application_code)
 
     # gets the city, the name and the email address of those applicants, who got no e-mail yet
+    # and modify sent_email column to True
     @classmethod
     def to_send_email(cls):
         data_list = []
-        querry = cls.select().where(cls.sent_email == False)
+        querry = cls.select().where(cls.sent_email == False and cls.application_code != None and cls.school_cid != None)
+        print(querry.count())
         for record in querry:
             city_record = City.get(City.cid == record.school_cid)
             data_list.append({'email': record.email,
                               'name': record.name,
                               'ap_code': record.application_code,
-                              'city': city_record.name})
-        return data_list
+                              'city': city_record.name,
+                              'aid': record.aid})
+            record.sent_email = True
+            record.save()
+            return data_list
+        # else:
+        #     print("Can't send email to everyone.")
+        #     return []
+
+    ############################################################
+    # we do not use the following, but might come in handy later
+    ############################################################
+    @classmethod
+    def is_application_code(cls):
+        app_has_appcode = cls.select().where(cls.application_code != None)
+        if len(app_has_appcode) >= 1:
+            return True
+        else:
+            return False
+
+    @classmethod
+    def is_school_cid(cls):
+        app_has_school_cid = cls.select().where(cls.school_cid != None)
+        if len(app_has_school_cid) >= 1:
+            return True
+        else:
+            return False
+
+    @classmethod
+    def applicants_without_app_code(cls):
+        applicants = cls.select().where(cls.application_code == None)
+        if len(applicants) != 0:
+            return applicants
+
+    @classmethod
+    def applicants_without_school(cls):
+        applicants = cls.select().where(cls.school_cid == None)
+        if len(applicants) != 0:
+            return applicants
+
+Applicant.to_send_email()
