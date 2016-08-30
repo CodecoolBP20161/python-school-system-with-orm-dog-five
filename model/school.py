@@ -4,7 +4,6 @@ from model.city import City
 
 
 class School(BaseModel):
-    """stores schools model/table"""
-    sid = PrimaryKeyField()
+    """city table/model"""
     name = CharField()
-    cid = ForeignKeyField(City, related_name="school_location")
+    city = ForeignKeyField(City, related_name="school_location")
