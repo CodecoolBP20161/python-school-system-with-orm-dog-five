@@ -1,5 +1,7 @@
-import getpass
 import os
+import getpass
+import smtplib
+
 
 class ConnectEmail:
     '''Handles everything related to database connection'''
@@ -7,7 +9,7 @@ class ConnectEmail:
     # check whether the file containing smtp data already exits
     @staticmethod
     def check_server_txt():
-        return os.path.isfile('smtp_data.txt')
+        return os.path.isfile('setup/smtp_data.txt')
 
     # gets data for SMTP server
     @staticmethod
@@ -39,7 +41,7 @@ class ConnectEmail:
 
         smtp_list = [fromaddr, password, email_server]
 
-        with open('smtp_data.txt', 'w') as myfile:
+        with open('setup/smtp_data.txt', 'w') as myfile:
             for elem in smtp_list:
                 myfile.writelines(elem  + '\n')
             print("SMTP settings have been saved.")
@@ -47,7 +49,7 @@ class ConnectEmail:
     # returns server connection object
     @classmethod
     def connect_server(cls):
-        with open('smtp_data.txt', 'r') as myfile:
+        with open('setup/smtp_data.txt', 'r') as myfile:
             lines = myfile.readlines()
             smtp_from_file = [line.strip("\n") for line in lines]
             cls.fromaddr = smtp_from_file[0]

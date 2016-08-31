@@ -3,6 +3,7 @@ from model.basemodel import BaseModel
 from model.city import City
 from model.school import School
 
+
 class Applicant(BaseModel):
     """Applicant model/table and data manipulation related to it"""
     name = CharField()

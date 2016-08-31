@@ -1,4 +1,6 @@
 from setup.setup import setup_db_all
+from setup.setup import setup_email_all
+
 
 user_input = input("Hello! Would you like to:\
                    \n1. Set up your database (WARNING: this will delete all your data!)\
@@ -12,7 +14,7 @@ if user_input == "1":
     setup_db_all()
 
 elif user_input == "2":
-    pass
+    setup_email_all()
 
 elif user_input == "3":
     pass

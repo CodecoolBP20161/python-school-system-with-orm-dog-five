@@ -1,11 +1,13 @@
 from setup.setup_email import ConnectEmail
 from setup.setup_database import ConnectDB
 from setup.build_data import Build
+from setup.example_data import ExampleData
+
 
 def setup_db_all():
     Build.create_tables()
-    # we need new example data to use this
-    # Build.upload_data()
+    Build.upload_data()
+
 
 def setup_email_all():
-    pass
+    ConnectEmail.set_smtp()
