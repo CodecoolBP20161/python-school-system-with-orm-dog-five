@@ -35,7 +35,7 @@ class Applicant(BaseModel):
         code_set = set()
         for appl_record in cls.select():
             code_set.add(appl_record.application_code)
-        return(code_set)
+        return code_set
 
     # assigns closest school for applicant
     @classmethod
@@ -54,7 +54,7 @@ class Applicant(BaseModel):
         self.code_set.add(self.application_code)
 
     @classmethod
-    def validate(cls, reg_dict):
+    def convert_raw_data(cls, reg_dict):
         try:
             home_city = City.get(name=reg_dict['home'])
             home_id = home_city.id
@@ -63,16 +63,12 @@ class Applicant(BaseModel):
         applicant = cls(name=reg_dict['name'],
                         home=home_id,
                         email=reg_dict['email'])
-        applicant.check_name()
-        applicant.check_home()
-        applicant.check_email()
-        if applicant.registration_error_set == set():
-            applicant.save()
-            return None
-        else:
-            reg_dict_with_error = reg_dict
-            reg_dict_with_error['error'] = applicant.registration_error_set
-            return(reg_dict_with_error)
+        return applicant
+
+    def validate(self):
+        self.check_name()
+        self.check_home()
+        self.check_email()
 
     def check_name(self):
         if ' ' not in self.name:
@@ -83,5 +79,16 @@ class Applicant(BaseModel):
             self.registration_error_set.add('home')
 
     def check_email(self):
-        if '@' or '.' not in self.email:
+        if ('@' not in self.email) or ('.' not in self.email):
             self.registration_error_set.add('email')
+
+    @classmethod
+    def build_new(cls, reg_dict):
+        applicant = cls.convert_raw_data(reg_dict)
+        applicant.validate()
+        if applicant.registration_error_set == set():
+            applicant.save()
+            return None
+        else:
+            reg_dict['error'] = applicant.registration_error_set
+            return reg_dict
