@@ -1,0 +1,16 @@
+
+
+---
+**Python school system with orm** is a practice assignment for the members of the team DOG5.
+---
+
+
+In order to make the code run, you have to install Flask by typing `pip install flask` and peewee ORM by typing `pip install peewee`
+
+By running **main.py**, you can reach the programs UI, and choose from the following options:
+ 1. setting up the **database**, creating **tables**
+ 2. start **web server**
+ 3. setting up **e-mail connection**
+ 4. **updating** new applicants with **application code** and find them **closest school** based on their home location
+ 5. **schedule new interview** for new applicants
+ 6. **sending e-mail** to new applicants
