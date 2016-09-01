@@ -19,7 +19,7 @@ class InterviewSlot(BaseModel):
         a_notin_is = Applicant.select().join(cls, JOIN.LEFT_OUTER).where(cls.applicant_id==None)
 
         for a in a_notin_is:
-            if a.school_cid != None:
+            if a.school_cid is not None:
                 try:
                     mentor = Mentor.get(Mentor.school_id==a.school_cid)
                     interview = Interview.get(Interview.location==a.school_cid)

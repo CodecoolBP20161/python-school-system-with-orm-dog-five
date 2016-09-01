@@ -66,6 +66,7 @@ class Applicant(BaseModel):
         return applicant
 
     def validate(self):
+        self.registration_error_set = set()
         self.check_name()
         self.check_home()
         self.check_email()
