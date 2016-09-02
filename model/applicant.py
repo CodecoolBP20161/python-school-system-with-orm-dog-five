@@ -2,6 +2,7 @@ from peewee import *
 from model.basemodel import BaseModel
 from model.city import City
 from model.school import School
+from model.closest import Closest
 from random import randint
 
 
@@ -29,15 +30,9 @@ class Applicant(BaseModel):
             else:
                 continue
 
-    # collects appl codes into a set
-    @classmethod
-    def read_codes(cls):
-        code_set = set()
-        for appl_record in cls.select():
-            code_set.add(appl_record.application_code)
-        return code_set
-
-    # assigns closest school for applicant
+    #
+    # assign application code to new applicant
+    #
     @classmethod
     def update_appl_code(cls):
         cls.code_set = cls.read_codes()
@@ -45,13 +40,33 @@ class Applicant(BaseModel):
             appl.generate_code()
             appl.save()
 
-    # generates unique code for applicant record
+    @classmethod
+    def read_codes(cls):
+        code_set = set()
+        for appl_record in cls.select():
+            code_set.add(appl_record.application_code)
+        return code_set
+
     def generate_code(self):
         while True:
             if self.application_code not in self.code_set:
                 break
             self.application_code = randint(100, 999)
         self.code_set.add(self.application_code)
+
+    #
+    # validate new applicant
+    #
+    @classmethod
+    def build_new(cls, reg_dict):
+        applicant = cls.convert_raw_data(reg_dict)
+        applicant.validate()
+        if applicant.registration_error_set == set():
+            applicant.save()
+            return None
+        else:
+            reg_dict['error'] = applicant.registration_error_set
+            return reg_dict
 
     @classmethod
     def convert_raw_data(cls, reg_dict):
@@ -83,13 +98,8 @@ class Applicant(BaseModel):
         if ('@' not in self.email) or ('.' not in self.email):
             self.registration_error_set.add('email')
 
-    @classmethod
-    def build_new(cls, reg_dict):
-        applicant = cls.convert_raw_data(reg_dict)
-        applicant.validate()
-        if applicant.registration_error_set == set():
-            applicant.save()
-            return None
-        else:
-            reg_dict['error'] = applicant.registration_error_set
-            return reg_dict
+    #
+    # received application email
+    #
+    def new_app_email(self):
+        pass

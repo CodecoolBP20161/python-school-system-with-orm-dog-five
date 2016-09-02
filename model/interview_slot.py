@@ -4,7 +4,7 @@ from model.school import School
 
 
 class InterviewSlot(BaseModel):
-    '''This class handles with the interview model/table'''
+    """This class handles with the interview model/table"""
     location = ForeignKeyField(School, related_name="interview_location")
     day = DateField()
     start_time = TimeField()
