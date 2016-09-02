@@ -23,10 +23,10 @@ class Applicant(BaseModel):
     # assigns closest school for applicant
     @classmethod
     def get_closest_school(cls):
-        query = Closest.select(Closest.school_cid).where(cls.home_cid == Closest.home_cid)
+        query = Closest.select(Closest.school).where(cls.home == Closest.home)
         for applicant in cls.select():
-            if applicant.school_cid is None:
-                applicant.school_cid = query
+            if applicant.school is None:
+                applicant.school = query
                 applicant.save()
             else:
                 continue
