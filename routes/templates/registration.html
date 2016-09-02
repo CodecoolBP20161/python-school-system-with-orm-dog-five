@@ -5,7 +5,7 @@
        <meta name="viewport" content="width=device-width, initial-scale=1.0">
        <!-- <title>Registration form</title> -->
         <!--<link rel="stylesheet" href="../static/css/normalize.css">-->
-        <link href='http://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+        <link href='<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">' rel='stylesheet' type='text/css'>
        <link rel="stylesheet" href="../static/css/main.css">
    </head>
 
@@ -13,22 +13,19 @@
        <h1>Registration form</h1>
        <form method="post" action="/registration">
 
-           <dl> <label for='name'>Name:</label></dl>
-           <dl> <input required id='name' name='name' title='name' type='text' value='{{ reg_data_valid.name|default('') }}' />
+           <label for='name'>Name:</label>
+           <input required id='name' name='name' title='name' type='text' value='{{ reg_data_valid.name|default('') }}' />
              {% if 'name' in reg_data_valid.error %}*{% endif %}
-           </dl>
 
-           <dl> <label>Address (City):</label></dl>
-           <dl> <input required name= 'home' title='address' type='text' value='{{ reg_data_valid.home|default('') }}' />
+           <label for='home'>Address (City):</label>
+           <input required id='home' name= 'home' title='address' type='text' value='{{ reg_data_valid.home|default('') }}' />
              {% if 'home' in reg_data_valid.error %}*{% endif %}
-           </dl>
 
-           <dl> <label>E-mail:</label></dl>
-           <dl> <input required name='email' id='email' title='email' type='text' value='{{ reg_data_valid.email|default('') }}' />
+           <label for='email'>E-mail:</label>
+           <input required name='email' id='email' title='email' type='text' value='{{ reg_data_valid.email|default('') }}' />
              {% if 'email' in reg_data_valid.error %}*{% endif %}
-           </dl>
 
-           <dl> <button id='submit_btn' type="submit">Save Application</button></dl>
+           <button id='submit_btn' type="submit">Save Application</button>
        </form>
    </body>
 </html>
