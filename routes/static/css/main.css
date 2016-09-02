@@ -12,7 +12,7 @@ body {
 
 
 form {
-  max-width: 350px;
+  max-width: 450px;
   margin: 10px auto;
   padding: 10px 20px;
   background: rgb(255,255,224);
@@ -41,6 +41,10 @@ select {
   margin-bottom: 30px;
 }
 
+label {
+display:block;
+margin-bottom: 8px;
+}
 
 button {
   padding: 19px 39px 18px 39px;
@@ -70,7 +74,7 @@ legend {
 
 
 #success {
-    min-width: 350px;
+    min-width: 450px;
     text-align: center;
     font-family: "Courier 10 Pitch", sans-serif;
     background: #f9ff87;

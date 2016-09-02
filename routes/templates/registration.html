@@ -13,19 +13,22 @@
        <h1>Registration form</h1>
        <form method="post" action="/registration">
 
-           <label for='name'>Name:</label>
-           <input required id='name' name='name' title='name' type='text' value='{{ reg_data_valid.name|default('') }}' />
-             {% if 'name' in reg_data_valid.error %}*{% endif %}
+           <dl><label for='name'>{% if 'name' in reg_data_valid.error %}*{% endif %}Name: </label><dl/>
+           <dl><input required id='name' name='name' title='name' type='text' value='{{ reg_data_valid.name|default('') }}' />
 
-           <label for='home'>Address (City):</label>
-           <input required id='home' name= 'home' title='address' type='text' value='{{ reg_data_valid.home|default('') }}' />
-             {% if 'home' in reg_data_valid.error %}*{% endif %}
+           <dl/>
 
-           <label for='email'>E-mail:</label>
-           <input required name='email' id='email' title='email' type='text' value='{{ reg_data_valid.email|default('') }}' />
-             {% if 'email' in reg_data_valid.error %}*{% endif %}
+           <dl><label for='home'>{% if 'home' in reg_data_valid.error %}*{% endif %}Address (City):</label><dl/>
+           <dl><input required id='home' name= 'home' title='address' type='text' value='{{ reg_data_valid.home|default('') }}' />
 
-           <button id='submit_btn' type="submit">Save Application</button>
+           <dl/>
+
+           <dl><label for='email'>{% if 'email' in reg_data_valid.error %}*{% endif %}E-mail:</label><dl/>
+           <dl><input required name='email' id='email' title='email' type='text' value='{{ reg_data_valid.email|default('') }}' />
+
+           <dl/>
+
+           <dl/><button id='submit_btn' type="submit">Save Application</button><dl/>
        </form>
    </body>
 </html>
