@@ -21,6 +21,7 @@ def submit_form():
     reg_dict = {}
     for elem in reg_data:
         reg_dict.update({elem: reg_data[elem]})
+    reg_dict['home'] = 'Budapest'
     reg_data_valid = register_applicant(reg_dict)
 
     if reg_data_valid is None:
