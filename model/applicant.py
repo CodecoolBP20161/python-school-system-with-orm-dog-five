@@ -2,7 +2,6 @@ from peewee import *
 from model.basemodel import BaseModel
 from model.city import City
 from model.school import School
-from model.closest import Closest
 from random import randint
 
 
@@ -82,7 +81,6 @@ class Applicant(BaseModel):
     #
     # application code
     #
-    # call before creating instance
     @classmethod
     def read_codes(cls):
         code_set = set()
@@ -102,12 +100,14 @@ class Applicant(BaseModel):
     #
     # email
     #
+    @property
     def new_app_email(self):
         msg_data = {}
         msg_data['Body'] = 'Hi ' + str(self.name) + ","\
                        + "\n\nI am happy to inform you that we received your application to Codecool."\
-                       + "\nThe closest Codecool School to you is in " + str(self.school.name) + "."\
-                       + "\nYour application code is " + str(self.application_code) + "."\
+                       + "\nYour School's name is " + str(self.school.name) + "."\
+                       + "\nYour application code is " + str(self.application_code) + "." \
+                       + "\nYou can log in using your e-mail address " + str(self.email) + " and your application code as password." \
                        + "\n\nRegards,\nCodecool Team"
         msg_data['Subject'] = 'Welcome'
         msg_data['To'] = str(self.email)
@@ -116,3 +116,4 @@ class Applicant(BaseModel):
 
     def new_app_sent(self):
         self.sent_application_email = True
+        self.save()
