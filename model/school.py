@@ -7,3 +7,4 @@ class School(BaseModel):
     """city table/model"""
     name = CharField()
     city = ForeignKeyField(City, related_name="school_location")
+

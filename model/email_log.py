@@ -10,3 +10,4 @@ class LogEmail(BaseModel):
     email = CharField()
     subject = CharField()
     body = CharField()
+
