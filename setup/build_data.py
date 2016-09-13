@@ -9,7 +9,7 @@ from model.interview import Interview
 from model.mentor import Mentor
 from model.school import School
 from model.interview_slot import InterviewSlot
-from model.log_email import LogEmail
+from model.email_log import LogEmail
 from setup.example_data import ExampleData
 
 

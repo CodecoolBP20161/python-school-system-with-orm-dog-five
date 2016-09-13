@@ -8,9 +8,11 @@ class School(BaseModel):
     name = CharField()
     city = ForeignKeyField(City, related_name="school_location")
 
+
     @classmethod
     def get_school_list(cls):
         school_list = []
         for school in cls.select():
             school_list.append(school.name)
         return school_list
+
