@@ -11,6 +11,7 @@ while user_input != 'q':
                        \n3. Start web server\
                        \nq quit\
                        \n')
+
     if user_input == '1':
         setup_db_all()
 

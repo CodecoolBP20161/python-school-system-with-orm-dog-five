@@ -1,51 +1,34 @@
 from peewee import *
-import getpass
+import json
 import os
 
 
 class ConnectDB:
     '''Handles everything related to database connection'''
 
-    # check whether the login file already exits
-    @staticmethod
-    def check_dsn_txt():
-        return os.path.isfile('./setup/login.txt')
+    __default = {'dbname': 'postgres', 'username': 'postgres'}
 
-    # saves PostgreSQL login data into txt file
-    @staticmethod
-    def dsn_input():
-        dbname = input("Database name: ")
-        username = input("User name: ")
-        dsn_list = [dbname, username]
-        with open('setup/login.txt', 'w') as myfile:
-            for word in dsn_list:
-                myfile.write(word + '\n')
-            print("Login file has been created.")
+    def __init__(self, dbname, username):
+        self.db = PostgresqlDatabase(dbname, user=username)
 
-    # reads postgresql login data from txt file and defines db
     @classmethod
-    def db_data(cls):
-        with open("setup/login.txt", "r") as myfile:
-            lines = myfile.readlines()
-            dsn_list = [line.strip("\n") for line in lines]
-            dbname, username = dsn_list
-            cls.db = PostgresqlDatabase(dbname, user=username)
-            return cls.db
-
-    # checks whether the login file already exists and creates connection with PostgreSQL
-    # this is what you need to call from main
-    @classmethod
-    def set_db(cls):
-        if cls.check_dsn_txt():
-            return cls.db_data()
+    def build_from_file(cls):
+        if os.path.isfile('setup/login.json'):
+            with open('setup/login.json', 'r') as infile:
+                data = json.load(infile)
         else:
-            cls.dsn_input()
-            return cls.db_data()
+            data = cls.get_user_data()
+        return cls(**data)
 
-    # if there is an error with connecting to PostgreSQL this function provides the option to reenter
-    # login data
     @classmethod
-    def error_db(cls):
-        answer = print('Cannot connect to PostgreSQL. Check whether PostgrSQL is running and reenter login data!')
-        cls.dsn_input()
-        cls.set_db()
+    def get_user_data(cls):
+        choice = input('Use default? Press (y) for yes.\n')
+        if choice == 'y':
+            data = cls.__default
+        else:
+            dbname = input("Database name: ")
+            username = input("User name: ")
+            data = {'dbname': dbname, 'username': username}
+        with open('setup/login.json', 'w') as outfile:
+            json.dump(data, outfile)
+        return data
