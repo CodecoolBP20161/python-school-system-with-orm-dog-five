@@ -5,24 +5,16 @@ class OrmEmail():
     """creates messages and sends e-mails"""
 
     def __init__(self, msg_data):
-        self.server, self.fromaddr, self.password = ConnectEmail.set_smtp()
-        self.body = msg_data['Body']
-        self.subject = msg_data['Subject']
-        self.toaddr = msg_data['To']
+        msg = MIMEText(msg_data['Body'])
+        msg['Subject'] = msg_data['Subject']
+        msg['To'] = msg_data['To']
+        self.MIMEText_obj = msg
         self.type = msg_data['Type']
 
-        msg = MIMEText(self.body)
-        msg['Subject'] = self.subject
-        msg['From'] = ConnectEmail.fromaddr
-        msg['To'] = self.toaddr
-
-        self.MIMEText_obj = msg
-
-
     # server info is inherited from the ConnectEmail class
-    def send(self):
-        self.server.starttls()
-        self.server.login(self.fromaddr, self.password)
-        self.server.send_message(self.MIMEText_obj)
-        self.server.quit()
-
+    def send(self, server):
+        self.MIMEText_obj['From'] = server.fromaddr
+        server.server.starttls()
+        server.server.login(server.fromaddr, server.password)
+        server.server.send_message(self.MIMEText_obj)
+        server.server.quit()

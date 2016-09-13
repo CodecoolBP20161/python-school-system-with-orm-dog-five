@@ -1,8 +1,6 @@
 from setup.setup import setup_db_all
 from setup.setup import setup_email_all
 from setup.setup import start_web_server
-from setup.setup import process_new_applicant
-from setup.setup import process_acceptance
 
 
 user_input = '0'
