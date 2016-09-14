@@ -1,8 +1,9 @@
 body {
     font-family: Helvetica Neue, monospace;
+
 }
 
-
+body,
 #whole-page {
     padding-top: 50px;
     padding-bottom: 300px;
@@ -38,11 +39,22 @@ body {
 
 #footer {
     display: table;
-    text-align: center;
     margin-left: auto;
     margin-right: auto;
+
+}
+
+.credit {
+    text-align: center;
+    margin: auto;
+    background-color: black;
 }
 
 .with-error {
     background-color: #ffffcc;
+}
+
+#success {
+    margin: auto;
+    color: white;
 }

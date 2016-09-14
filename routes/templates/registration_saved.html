@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Successful registration.</title>
-        <link rel="stylesheet" href="../static/css/main.css">
-    </head>
-    <body>
+{% extends "layout.html" %}
+
+{% block title %}Successful Registration{% endblock %}
+
+{% block body %}
     <div>
         <h1 id="success">SUCCESSFUL<br>REGISTRATION</h1>
         <form action="/registration" method="get"><button id='save_button'>Back to the application form</button></form>
     </div>
-    </body>
-</html>
+
+{% endblock %}
