@@ -7,6 +7,20 @@ import os
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
+@app.route('/about', methods=['GET'])
+def about_us():
+    return render_template('about.html')
+
+
+@app.route('/services', methods=['GET'])
+def our_services():
+    return render_template('services.html')
+
+
+@app.route('/contacts', methods=['GET'])
+def contact_us():
+    return render_template('contacts.html')
+
 
 @app.route('/')
 @app.route('/registration', methods=['GET'])

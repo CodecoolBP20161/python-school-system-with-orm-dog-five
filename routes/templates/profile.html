@@ -4,7 +4,9 @@
 {% block body %}
 
     <div id="profile">
-         <h1 id="login-welcome"> HI {{ name }}!</h1>
+        <h1 id="login-welcome"> Hi {{ name }}!</h1>
+        <h4 class="welcome">Later you will be able to see your profile information on this page.</h4>
+
         <form id="logout_form" method="POST" action="/logout">
              <button id="logout-button" type="submit" name="logout_btn">Logout</button>
          </form>

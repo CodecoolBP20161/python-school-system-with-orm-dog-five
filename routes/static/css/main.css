@@ -68,26 +68,31 @@ body,
     width: 100%;
 }
 
-#logout-button {
-    height: 30px;
-    width: 150px;
-    color: dimgray;
-    margin:auto;
-    text-align: center;
-    background-color: darkgrey;
-}
-
-#login-welcome {
-    color: lightsalmon;
-}
-
 #logout_form {
      padding-left: 100px;
 }
 
-#save_button {
-    background-color: aliceblue;
-    color: darkgrey;
+#logout-button {
+    height: 30px;
+    width: 150px;
+    margin:auto;
+    text-align: center;
+    background-color: #150000;
+    border-radius: 8px;
+    color: peachpuff;
+}
+
+#login-welcome,
+.welcome {
+    color: coral;
+    padding-left: 100px;
+}
+
+
+#saved_form {
+    background-color: #150000;
+    border-radius: 8px;
+    color: peachpuff;
 }
 
 #success {
@@ -97,4 +102,37 @@ body,
 #success_p,
 #save_button {
     margin-left: 100px;
+}
+
+
+
+#contacts ul li #email-contact  a {
+  background-image: url('../static/images/email.png');
+}
+
+#contacts {
+    font-size: large;
+    margin-top: 230px;
+    margin-left: 80px;
+    color: coral;
+}
+
+#contacts ul {
+    list-style: none;
+}
+
+#contacts ul li {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#email-contact,
+#tel-contact {
+    color:  #150000;
+    font-weight: 700;
+    font-size: 1.7em;
+}
+
+#dog {
+    color: #150000;
 }
