@@ -57,14 +57,44 @@ body,
     background-color: #ce8483;
 }
 
-#success {
+#saved_reg {
     margin: auto;
-    color: white;
+    color: coral;
+
 }
 
-#profile{
+#profile {
     padding-top: 100px;
-    margin: auto;
     width: 100%;
+}
+
+#logout-button {
+    height: 30px;
+    width: 150px;
+    color: dimgray;
+    margin:auto;
     text-align: center;
+    background-color: darkgrey;
+}
+
+#login-welcome {
+    color: lightsalmon;
+}
+
+#logout_form {
+     padding-left: 100px;
+}
+
+#save_button {
+    background-color: aliceblue;
+    color: darkgrey;
+}
+
+#success {
+    margin-left: 100px;
+    margin-top: 200px;
+}
+#success_p,
+#save_button {
+    margin-left: 100px;
 }

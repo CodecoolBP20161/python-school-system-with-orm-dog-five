@@ -19,20 +19,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Home</a>
+                <a class="navbar-brand" href="{{ url_for('reg_form') }}">Home</a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
+                    <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+                    <!--<li><a href="{{ url_for('our_services') }}">Our Services</a></li>-->
+                    <li><a href="{{ url_for('contact_us') }}">Contact Us</a></li>
                 </ul>
             </div>
 
