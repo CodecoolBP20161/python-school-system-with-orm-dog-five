@@ -38,6 +38,7 @@ body,
 }
 
 #footer {
+    min-width: 100%;
     display: table;
     margin-left: auto;
     margin-right: auto;
@@ -45,9 +46,11 @@ body,
 }
 
 .credit {
+    height: 50px;
     text-align: center;
     margin: auto;
     background-color: black;
+    padding-top: 15px;
 }
 
 .with-error {
