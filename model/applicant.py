@@ -116,3 +116,14 @@ class Applicant(BaseModel):
     def new_app_sent(self):
         self.sent_application_email = True
         self.save()
+
+    @classmethod
+    def get_login(cls, password):
+        try:
+            applicant = cls.get(application_code=password)
+            data = {'email':applicant.email, 'password':str(applicant.application_code), 'name':applicant.name}
+        except Applicant.DoesNotExist:
+            data = {'email':None, 'password':None, 'name':None}
+        except ValueError:
+            data = {'email':None, 'password':None, 'name':None}
+        return data

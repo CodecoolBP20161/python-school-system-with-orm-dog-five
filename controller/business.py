@@ -17,3 +17,7 @@ def register_applicant(reg_dict):
     else:
         reg_dict_processed['error'] = applicant.registration_error_set
         return(reg_dict_processed)
+
+
+def get_login(password):
+    return Applicant.get_login(password)

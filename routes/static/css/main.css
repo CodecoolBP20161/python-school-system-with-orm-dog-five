@@ -46,3 +46,6 @@ body {
 .with-error {
     background-color: #ffffcc;
 }
+.text-danger{
+    font-size: 1px;
+}

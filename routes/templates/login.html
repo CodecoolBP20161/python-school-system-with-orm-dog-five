@@ -52,16 +52,17 @@
 
 
             <div class="col-md-3">
-                <form action="" method="" id="form-1">
+                <form action="/login" method="post" id="form-1">
 
                     <div class="form-group">
-                        <h3>Login:</h3>
-                        <input type="email" class="form-control" id="account" placeholder="email"/>
+                        <h3>Login: </h3>
+                        <label for="account" class="text-danger">{% if error != '' %} {{ error }} {% endif %}</label>
+                        <input required name="email" type="email" class="form-control" id="account" placeholder="email"/>
                     </div>
 
                     <div class="form-inline">
-                        <input type="text" class="form-control" id="password" placeholder="application code"/>
-                        <a class="btn btn-info pull-right" href="">Login</a>
+                        <input required type="password" class="form-control" id="password" name="password" placeholder="application code"/>
+                        <button class="btn btn-info pull-right" type="submit" href="">Login</button>
                     </div>
                 </form>
 
