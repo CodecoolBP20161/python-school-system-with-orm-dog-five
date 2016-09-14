@@ -103,15 +103,14 @@ class Applicant(BaseModel):
     @property
     def new_app_email(self):
         msg_data = {}
-        msg_data['Body'] = 'Hi ' + str(self.name) + ","\
-                       + "\n\nI am happy to inform you that we received your application to Codecool."\
-                       + "\nYour School's name is " + str(self.school.name) + "."\
+        msg_data['body'] = 'Hi ' + str(self.name) + ","\
+                       + "\n\nWe received your application to Codecool "+ str(self.school.name) + "."\
                        + "\nYour application code is " + str(self.application_code) + "." \
-                       + "\nYou can log in using your e-mail address " + str(self.email) + " and your application code as password." \
+                       + "\nYou can log in with your e-mail address using your application code as password." \
                        + "\n\nRegards,\nCodecool Team"
-        msg_data['Subject'] = 'Welcome'
-        msg_data['To'] = str(self.email)
-        msg_data['Type'] = 'newreg'
+        msg_data['subject'] = 'Welcome'
+        msg_data['to'] = str(self.email)
+        msg_data['type'] = 'newreg'
         return msg_data
 
     def new_app_sent(self):

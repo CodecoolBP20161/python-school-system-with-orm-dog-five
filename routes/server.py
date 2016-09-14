@@ -29,6 +29,10 @@ def submit_form():
     else:
         return render_template('login.html', reg_data_valid=reg_data_valid, school_list=school_list)
 
+@app.route('/admin', methods=['GET'])
+def admin_panel():
+    return render_template('admin.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
 
