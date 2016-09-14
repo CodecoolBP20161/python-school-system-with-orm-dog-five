@@ -75,7 +75,11 @@ class Applicant(BaseModel):
             self.registration_error_set.add('school')
 
     def check_email(self):
-        if ('@' not in self.email) or ('.' not in self.email):
+        data = Applicant.select()
+        email_list = []
+        for i in data:
+            email_list.append(i.email)
+        if ('@' not in self.email) or ('.' not in self.email) or self.email in email_list:
             self.registration_error_set.add('email')
 
     #

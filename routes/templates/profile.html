@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Profile</title>
-</head>
-<body>
-    <h1> HI {{ name }}!</h1>
+{% extends 'layout.html' %}
 
-  <form method="POST" action="/logout">
-        <button type="submit" name="logout_btn">Logout</button>
-    </form>
-</body>
-</html>
+{% block title %}{{ name }}|Profile{% endblock %}
+{% block body %}
+
+    <div id="profile">
+         <h1> HI {{ name }}!</h1>
+        <form method="POST" action="/logout">
+             <button type="submit" name="logout_btn">Logout</button>
+         </form>
+    </div>
+
+{% endblock %}

@@ -54,7 +54,7 @@ body,
 }
 
 .with-error {
-    background-color: #ffffcc;
+    background-color: #ce8483;
 }
 
 #success {
@@ -62,3 +62,9 @@ body,
     color: white;
 }
 
+#profile{
+    padding-top: 100px;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+}
