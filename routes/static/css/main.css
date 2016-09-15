@@ -114,13 +114,13 @@ body,
 }
 
 #contacts {
-    font-size: large;
-    margin-top: 230px;
+    /*font-size: large;*/
     color: coral;
 }
 
 #contacts ul {
     list-style: none;
+    padding-left: 0px;
 }
 
 #contacts ul li {
@@ -147,4 +147,8 @@ body,
 
 #contact-body {
     color: white;
+}
+
+#contacts_div {
+    margin-top: 50px;
 }
