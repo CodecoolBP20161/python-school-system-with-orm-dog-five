@@ -97,6 +97,15 @@ class Applicant(BaseModel):
             self.application_code = randint(1000, 9999)
         self.code_set.add(self.application_code)
 
+    @classmethod
+    def get_login(cls, password):
+        try:
+            applicant = cls.get(application_code=password)
+            data = {'email': applicant.email, 'password': applicant.application_code}
+        except Applicant.DoesNotExist:
+            data = {'email': None, 'password': None}
+        return data
+
     #
     # email
     #

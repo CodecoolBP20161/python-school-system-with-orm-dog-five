@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, redirect, request
 from controller.business import register_applicant
+from controller.business import show_table
 from model.school import School
 
 
@@ -29,9 +30,10 @@ def submit_form():
     else:
         return render_template('login.html', reg_data_valid=reg_data_valid, school_list=school_list)
 
-@app.route('/admin', methods=['GET'])
-def admin_panel():
-    return render_template('admin.html')
+@app.route('/admin/e-mail-log', methods=['GET'])
+def admin_dashboard():
+    email_list = enumerate(show_table())
+    return render_template('admin.html', email_list=email_list)
 
 if __name__ == '__main__':
     app.run(debug=True)
