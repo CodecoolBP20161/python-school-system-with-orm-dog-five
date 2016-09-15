@@ -1,11 +1,13 @@
 from flask import Flask, render_template, url_for, redirect, request, flash, session
 from controller.business import register_applicant, get_login
 from model.school import School
+from model.applicant import Applicant
 import os
 
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
+
 
 @app.route('/about', methods=['GET'])
 def about_us():
@@ -23,12 +25,16 @@ def contact_us():
 
 
 @app.route('/')
-@app.route('/registration', methods=['GET'])
-def reg_form():
+def index():
     school_list = School.get_school_list()
     reg_data_valid = {}
     error = ''
     return render_template('login.html', reg_data_valid=reg_data_valid, school_list=school_list, error=error)
+
+
+@app.route('/registration', methods=['GET'])
+def reg_form():
+    return redirect(url_for('index'))
 
 
 @app.route('/registration', methods=['POST'])
@@ -53,27 +59,36 @@ def login():
     error = ''
     reg_data_valid = {}
     school_list = School.get_school_list()
-    data = get_login(request.form['password'])
-    session['email'] = data['email']
-    session['password'] = data['password']
 
     if request.method == 'POST':
-        if request.form['email'] != session['email']:
-            error = 'Invalid password or e-mail'
-        elif request.form['password'] != session['password']:
-            error = 'Invalid password or e-mail'
-        else:
+        data = get_login(request.form['password'])
+        print(request.form['password'])
+
+        if data['password'] and data['email'] == request.form['email'].strip():
+            session['password'] = data['password']
+            session['email'] = data['email']
             session['logged_in'] = True
-            flash('You were logged in')
             return render_template('profile.html', name=data['name'])
-    return render_template('login.html', reg_data_valid=reg_data_valid, school_list=school_list, error=error)
+        else:
+            error = 'Invalid password or e-mail'
+
+    return render_template('login.html', reg_data_valid=reg_data_valid, school_list= school_list, error=error)
+
+
+@app.route('/profile', methods=['GET', 'POST'])
+def show_profile():
+    if 'password' in session:
+        user = Applicant.select().where(Applicant.email==session['email']).get()
+        return render_template('profile.html', name=user.name)
+    else:
+        return redirect(url_for('index'))
 
 
 @app.route('/logout', methods=['POST'])
 def logout():
-    session.pop('logged_in', None)
+    session.pop('password', None)
     flash('You were logged out')
-    return redirect(url_for('reg_form'))
+    return redirect(url_for('index'))
 
 
 @app.route('/admin', methods=['GET'])
