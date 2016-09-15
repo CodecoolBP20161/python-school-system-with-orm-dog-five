@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{ name }}|Profile{% endblock %}
+{%block script %} <script type="text/javascript">
+            function preventBack() { window.history.forward(); }
+            setTimeout("preventBack()", 0);
+            window.onunload = function () { null };
+        </script>
+{% endblock %}
+{% block body %}
+
+    <div id="profile">
+        <h1 id="login-welcome"> Hi {{ name }}!</h1>
+        <h4 class="welcome">Later you will be able to see your profile information on this page.</h4>
+
+        <form id="logout_form" method="POST" action="/logout">
+             <button id="logout-button" type="submit" name="logout_btn">Logout</button>
+         </form>
+    </div>
+
+{% endblock %}

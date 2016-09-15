@@ -143,3 +143,7 @@ smtp_data.txt
 
 #OSX shit
 .DS_Store
+
+# JSON files
+login.json
+smtp_data.json

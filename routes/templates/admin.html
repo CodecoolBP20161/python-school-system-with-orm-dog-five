@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+
+        <div class="row top-buffer" id="whole-page">
+            <div class="col-md-2"></div>
+
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                  <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Type</th>
+                                <th>To</th>
+                                <th>Subject</th>
+                                <th>Body</th>
+                                <th>Timestamp</th>
+                            </tr>
+                            <tbody>
+                            {% for e in email_list %}
+                            <tr>
+                                <th>{{ e[0] + 1 }}</th>
+                                <td>{{ e[1].type }}</td>
+                                <td>{{ e[1].to }}</td>
+                                <td>{{ e[1].subject }}</td>
+                                <td>{{ e[1].body }}</td>
+                                <td>{{ e[1].timestamp }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </thead>
+                      </table>
+                  </div>
+                </div>
+            </div>
+
+            <div class="col-md-2"></div>
+        </div>
+
+{% endblock %}

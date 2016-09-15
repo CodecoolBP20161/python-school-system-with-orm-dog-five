@@ -1,7 +1,5 @@
 # This script can create the database tables based on your models
 from peewee import *
-from setup.setup_database import ConnectDB
-from setup.example_data import ExampleData
 from model.applicant import Applicant
 from model.city import City
 from model.closest import Closest
@@ -9,36 +7,28 @@ from model.interview import Interview
 from model.mentor import Mentor
 from model.school import School
 from model.interview_slot import InterviewSlot
-from model.log_email import LogEmail
+from model.email_log import LogEmail
 from setup.example_data import ExampleData
 
 
-class Build(ConnectDB):
+class Build():
     """makes the tables and fills them up with example data using ExampleData class"""
-    # create tables then fills them up with data
+
     @classmethod
-    def create_tables(cls):
-        cls.db.connect()
-        cls.delete()
+    def create_tables(cls, db):
+        db.connect()
+        cls.delete(db)
         try:
-            cls.db.create_tables([City, School, Applicant, Closest, Mentor, Interview, InterviewSlot, LogEmail], safe=True)
-            return_message = "Tables were created"
-            print(return_message)
-            return(return_message)
+            db.create_tables([City, School, Applicant, Closest, Mentor, Interview, InterviewSlot, LogEmail], safe=True)
+            return print("Tables were created")
         except OperationalError:
-            return_message = "Tables already exists."
-            print(return_message)
-            return(return_message)
+            return print("Tables already exists.")
 
-    # deletes tables
-    @classmethod
-    def delete(cls):
-        cls.db.drop_tables([City, School, Applicant, Closest, Mentor, Interview, InterviewSlot, LogEmail], safe=True, cascade = True)
-        return_message = "Tables deleted."
-        print(return_message)
-        return(return_message)
+    @staticmethod
+    def delete(db):
+        db.drop_tables([City, School, Applicant, Closest, Mentor, Interview, InterviewSlot, LogEmail], safe=True, cascade = True)
+        return print("Tables deleted.")
 
-    # fill it up with data
     @staticmethod
     def upload_data():
         ExampleData.create_cities()
@@ -48,5 +38,4 @@ class Build(ConnectDB):
         ExampleData.create_interview()
         ExampleData.create_applicants()
         ExampleData.create_scheduled_interviews()
-        return_message = "Tables updated with example data."
-        return(return_message)
+        return print("Tables updated with example data.")

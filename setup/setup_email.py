@@ -1,69 +1,45 @@
 import os
 import getpass
 import smtplib
+import json
 
 
 class ConnectEmail:
-    '''Handles everything related to database connection'''
+    '''Handles everything related to e-mail connection'''
 
-    # check whether the file containing smtp data already exits
-    @staticmethod
-    def check_server_txt():
-        return os.path.isfile('setup/smtp_data.txt')
+    __default = {'fromaddr': 'dog5.laboratories@gmail.com',
+                 'password': 'instancia',
+                 'smtp_addr': 'smtp.gmail.com',
+                 'port': 587}
 
-    # gets data for SMTP server
-    @staticmethod
-    def prompt_smtp():
-        fromaddr = 'dog5.laboratories@gmail.com'
-        password = 'instancia'
-        email_server = 'smtp.gmail.com, 587'
+    def __init__(self, fromaddr, password, smtp_addr, port):
+        self.fromaddr = fromaddr
+        self.password = password
+        self.server = smtplib.SMTP(smtp_addr, port)
 
-        sender = input("Email address of sender is dog5.laboratories@gmail.com by default. Do you want to change it? (Y/n) ")
+    @classmethod
+    def build_from_file(cls):
+        if os.path.isfile('setup/smtp_data.json'):
+            with open('setup/smtp_data.json', 'r') as infile:
+                data = json.load(infile)
+        else:
+            data = cls.get_user_data()
+        return cls(**data)
 
-        if sender.lower() == 'n':
-            pass
-        elif sender.lower() == 'y':
+    @classmethod
+    def get_user_data(cls):
+        choice = input('Use default? Press (y) for yes.\n')
+        if choice == 'y':
+            data = cls.__default
+        else:
             fromaddr = input('Email address of sender: ')
             password = getpass.getpass()
-            email_smtp = input('SMTP server is set to smtp.gmail.com/port: 587 by default. Do you want to change it? Y/n? ')
-            if email_smtp.lower() == 'n':
-                pass
-            elif email_smtp.lower() == 'y':
-                server = input("Your email providers smtp server: ")
-                port = input('Port: ')
-                email_server = '{}, {}'.format(server, port)
-            else:
-                fromaddr = 'dog5.laboratories@gmail.com'
-                password = 'instancia'
-                print("Not a valid option. We are going to use the default settings.")
-        else:
-            print("Not a valid option. We are going to use the default settings.")
-
-        smtp_list = [fromaddr, password, email_server]
-
-        with open('setup/smtp_data.txt', 'w') as myfile:
-            for elem in smtp_list:
-                myfile.writelines(elem  + '\n')
-            print("SMTP settings have been saved.")
-
-    # returns server connection object
-    @classmethod
-    def connect_server(cls):
-        with open('setup/smtp_data.txt', 'r') as myfile:
-            lines = myfile.readlines()
-            smtp_from_file = [line.strip("\n") for line in lines]
-            cls.fromaddr = smtp_from_file[0]
-            cls.password = smtp_from_file[1]
-            server = smtp_from_file[2].split(', ')
-            server = tuple([server[0], int(server[1])])
-            cls.server = smtplib.SMTP(server[0], server[1])
-        return cls.server, cls.fromaddr, cls.password
-
-    # this is what you need to call from main
-    @classmethod
-    def set_smtp(cls):
-        if cls.check_server_txt():
-            return cls.connect_server()
-        else:
-            cls.prompt_smtp()
-            return cls.connect_server()
+            smtp_addr = input('SMTP server address:')
+            port = int(input('Port: '))
+            data = {'fromaddr': fromaddr,
+                    'password': password,
+                    'smtp_addr': smtp_addr,
+                    'port': port}
+        with open('setup/smtp_data.json', 'w') as outfile:
+            json.dump(data, outfile)
+        return data
