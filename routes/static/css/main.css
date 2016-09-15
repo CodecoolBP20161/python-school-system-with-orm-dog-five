@@ -116,7 +116,6 @@ body,
 #contacts {
     font-size: large;
     margin-top: 230px;
-    margin-left: 80px;
     color: coral;
 }
 
@@ -131,11 +130,21 @@ body,
 
 #email-contact,
 #tel-contact {
-    color:  #150000;
+    color:  white;
     font-weight: 700;
     font-size: 1.7em;
 }
 
 #dog {
     color: #150000;
+}
+
+#about{
+    margin-top: 50px;
+    letter-spacing:3px;
+    color: white;
+}
+
+#contact-body {
+    color: white;
 }
