@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, redirect, request, flash, session
-from controller.business import register_applicant, get_login
+from controller.business import register_applicant, get_login, show_table
 from model.school import School
 from model.applicant import Applicant
 import os
@@ -91,9 +91,10 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/admin', methods=['GET'])
-def admin_panel():
-    return render_template('admin.html')
+@app.route('/admin/e-mail-log', methods=['GET'])
+def admin_dashboard():
+    email_list = enumerate(show_table())
+    return render_template('admin.html', email_list=email_list)
 
 if __name__ == '__main__':
     app.run(debug=True)

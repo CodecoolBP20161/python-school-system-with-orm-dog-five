@@ -121,6 +121,9 @@ class Applicant(BaseModel):
         self.sent_application_email = True
         self.save()
 
+    #
+    # login
+    #
     @classmethod
     def get_login(cls, password):
         try:
