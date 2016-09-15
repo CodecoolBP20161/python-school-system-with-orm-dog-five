@@ -1,8 +1,9 @@
 body {
     font-family: Helvetica Neue, monospace;
+
 }
 
-
+body,
 #whole-page {
     padding-top: 50px;
     padding-bottom: 300px;
@@ -37,12 +38,104 @@ body {
 }
 
 #footer {
+    min-width: 100%;
     display: table;
-    text-align: center;
     margin-left: auto;
     margin-right: auto;
+
+}
+
+.credit {
+    height: 50px;
+    text-align: center;
+    margin: auto;
+    background-color: black;
+    padding-top: 15px;
 }
 
 .with-error {
-    background-color: #ffffcc;
+    background-color: #ce8483;
+}
+
+#saved_reg {
+    margin: auto;
+    color: coral;
+
+}
+
+#profile {
+    padding-top: 100px;
+    width: 100%;
+}
+
+#logout_form {
+     padding-left: 100px;
+}
+
+#logout-button {
+    height: 30px;
+    width: 150px;
+    margin:auto;
+    text-align: center;
+    background-color: #150000;
+    border-radius: 8px;
+    color: peachpuff;
+}
+
+#login-welcome,
+.welcome {
+    color: coral;
+    padding-left: 100px;
+}
+
+
+#saved_form {
+    color: peachpuff;
+}
+
+
+#success {
+    margin-left: 100px;
+    margin-top: 200px;
+}
+
+#success_p,
+#save_button {
+    margin-left: 100px
+}
+
+#save_button {
+    background-color: #150000;
+    border-radius: 8px;
+}
+
+#contacts ul li #email-contact  a {
+  background-image: url('../static/images/email.png');
+}
+
+#contacts {
+    font-size: large;
+    margin-top: 230px;
+    margin-left: 80px;
+    color: coral;
+}
+
+#contacts ul {
+    list-style: none;
+}
+
+#contacts ul li {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#email-contact,
+#tel-contact {
+    color:  #150000;
+    font-weight: 700;
+    font-size: 1.7em;
+}
+
+#dog {
+    color: #150000;
 }

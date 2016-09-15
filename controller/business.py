@@ -19,8 +19,10 @@ def register_applicant(reg_dict):
         reg_dict_processed['error'] = applicant.registration_error_set
         return(reg_dict_processed)
 
-def login(password):
-    return Applicant.get_login(password)
 
 def show_table():
     return LogEmail.all_email()
+
+
+def get_login(password):
+    return Applicant.get_login(password)

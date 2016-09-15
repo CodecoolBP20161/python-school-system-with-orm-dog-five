@@ -75,7 +75,11 @@ class Applicant(BaseModel):
             self.registration_error_set.add('school')
 
     def check_email(self):
-        if ('@' not in self.email) or ('.' not in self.email):
+        data = Applicant.select()
+        email_list = []
+        for i in data:
+            email_list.append(i.email)
+        if ('@' not in self.email) or ('.' not in self.email) or self.email in email_list:
             self.registration_error_set.add('email')
 
     #
@@ -97,15 +101,6 @@ class Applicant(BaseModel):
             self.application_code = randint(1000, 9999)
         self.code_set.add(self.application_code)
 
-    @classmethod
-    def get_login(cls, password):
-        try:
-            applicant = cls.get(application_code=password)
-            data = {'email': applicant.email, 'password': applicant.application_code}
-        except Applicant.DoesNotExist:
-            data = {'email': None, 'password': None}
-        return data
-
     #
     # email
     #
@@ -125,3 +120,17 @@ class Applicant(BaseModel):
     def new_app_sent(self):
         self.sent_application_email = True
         self.save()
+
+    #
+    # login
+    #
+    @classmethod
+    def get_login(cls, password):
+        try:
+            applicant = cls.get(application_code=password)
+            data = {'email':applicant.email, 'password':str(applicant.application_code), 'name':applicant.name}
+        except Applicant.DoesNotExist:
+            data = {'email':None, 'password':None, 'name':None}
+        except ValueError:
+            data = {'email':None, 'password':None, 'name':None}
+        return data
