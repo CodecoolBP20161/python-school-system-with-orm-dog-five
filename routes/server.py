@@ -62,7 +62,6 @@ def login():
 
     if request.method == 'POST':
         data = get_login(request.form['password'])
-        print(request.form['password'])
 
         if data['password'] and data['email'] == request.form['email'].strip():
             session['password'] = data['password']
