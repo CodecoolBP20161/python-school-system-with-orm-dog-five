@@ -90,21 +90,24 @@ body,
 
 
 #saved_form {
-    background-color: #150000;
-    border-radius: 8px;
     color: peachpuff;
 }
+
 
 #success {
     margin-left: 100px;
     margin-top: 200px;
 }
+
 #success_p,
 #save_button {
-    margin-left: 100px;
+    margin-left: 100px
 }
 
-
+#save_button {
+    background-color: #150000;
+    border-radius: 8px;
+}
 
 #contacts ul li #email-contact  a {
   background-image: url('../static/images/email.png');
